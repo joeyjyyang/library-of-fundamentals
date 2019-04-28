@@ -74,13 +74,13 @@ void LinkedList::appendNode(const int id)
 	Node* current = new Node(id);
 	if (isEmpty()) 
 	{
-		std::cout << "Adding first node to empty Linked List: " << "id: " << current->id_ << std::endl;
+		std::cout << "Adding first node {id: " << current->id_ << "} to empty Linked List." << std::endl;
 		head_ = current;
 		tail_ = current;
 	}
 	else 
 	{
-		std::cout << "Adding new node to end of Linked List: " << "id: " << current->id_ << std::endl;
+		std::cout << "Adding new node {id: " << current->id_ << "} to end of Linked List." << std::endl;
 		tail_->next_ = current;
 		tail_ = tail_->next_;
 	}
@@ -90,14 +90,14 @@ void LinkedList::prependNode(const int id)
 {
 	Node* current = new Node(id);
 	if (isEmpty()) 
-	{
+	{	
 		std::cout << "Adding first node to empty Linked List: " << "id: " << current->id_ << std::endl;
 		head_ = current;
 		tail_ = current;
 	}
 	else 
 	{
-		std::cout << "Adding new node to beginning of Linked List: " << "id: " << current->id_ << std::endl;
+		std::cout << "Adding new node {id: " << current->id_ << "} to beginning of Linked List." << std::endl;
 		current->next_ = head_;
 		head_ = current;
 	}
@@ -105,15 +105,15 @@ void LinkedList::prependNode(const int id)
 
 void LinkedList::insertNode(const int id, int position) 
 {
-	if (position == 1) 
+	if (position == 0) 
 	{
 		prependNode(id);
 	}
-	else if (position == getSize() + 1) 
+	else if (position == getSize()) 
 	{
 		appendNode(id);
 	}
-	else if (position > getSize() + 1) 
+	else if (position > getSize() || position < 0) 
 	{
 		std::cout << "Error: the position to insert the new node is invalid." << std::endl;
 	}
@@ -121,10 +121,10 @@ void LinkedList::insertNode(const int id, int position)
 	{
 		Node* current = new Node(id);
 		Node* trail = head_;
-		for (int current_position = 1; current_position < position - 1; current_position++) {
+		for (int current_position = 0; current_position < position - 1; current_position++) {
 			trail = trail->next_;
 		}
-		std::cout << "Inserting new node to Linked List: " << "id: " << current->id_ << "at position: " << position << std::endl;
+		std::cout << "Inserting new node {id: " << current->id_ << "} to Linked List at position " << position << std::endl;
 		current->next_ = trail->next_;
 		trail->next_ = current;
 	}
@@ -140,14 +140,14 @@ void LinkedList::removeNode(const int id)
 	{
 		if (head_->id_ == id) 
 		{
-			std::cout << "Removing node from beginning of Linked List: " << "ID: " << head_->id_ << std::endl;
+			std::cout << "Removing node {id: " << head_->id_ << "} from beginning of Linked List." << std::endl;
 			Node* current = head_;
 			head_ = head_->next_;
 			delete current;
 		}
 		else if (tail_->id_ == id) 
 		{
-			std::cout << "Removing node from end of Linked List: " << "ID: " << tail_->id_ << std::endl;
+			std::cout << "Removing node {id: " << tail_->id_ << "} from end of Linked List." << std::endl;
 			Node* current = head_;
 			while (current->next_ != tail_) 
 			{
@@ -166,7 +166,7 @@ void LinkedList::removeNode(const int id)
 			{
 				if (current->id_ == id) 
 				{
-					std::cout << "Removing node from Linked List: " << "ID: " << current->id_ << std::endl;
+					std::cout << "Removing node {id: " << current->id_ << "} from Linked List." << std::endl;
 					trail->next_ = current->next_;
 					current->next_ = nullptr;
 					delete current;
@@ -192,12 +192,16 @@ void LinkedList::printLinkedList() const
 	else 
 	{
 		Node* current = head_;
-		std::cout << "Printing nodes of Linked List: " << std::endl;
+		std::cout << "-------------------------------" << std::endl;
+		std::cout << "Printing nodes of Linked List." << std::endl;
+		int position = 0;
 		while (current != nullptr) 
 		{
-			std::cout << "ID: " << current->id_ << std::endl;
+			std::cout << "Node {id: " << current->id_ <<  "} at position: " << position << std::endl;
 			current = current->next_;
+			position++;
 		}
+		std::cout << "-------------------------------" << std::endl;	
 	}
 }
 
