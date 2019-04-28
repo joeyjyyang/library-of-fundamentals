@@ -1,2 +1,4 @@
 # library-of-fundamentals
-implementations of essential data structures and algorithms
+
+Author: Joey Yang
+Description: Implementations of essential data structures and algorithms
