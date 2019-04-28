@@ -17,7 +17,7 @@ LinkedList::LinkedList()
 {
 	head_ = nullptr;
 	tail_ = nullptr;
-	std::cout << "Linked List object instantiated.";
+	std::cout << "Linked List object instantiated." << std::endl;
 }
 
 /* rule of 3 */
