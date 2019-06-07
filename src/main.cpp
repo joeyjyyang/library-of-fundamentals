@@ -6,7 +6,7 @@
  
 int main(int argc, char* argv[])
 {
-	LinkedList linked_list;
+	data_structure::LinkedList linked_list;
 
 	linked_list.appendNode(3);
 	linked_list.appendNode(4);

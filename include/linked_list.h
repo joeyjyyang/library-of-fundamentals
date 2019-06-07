@@ -13,6 +13,8 @@
 #include <fstream>
 #include <sstream>
 
+namespace data_structure
+{
 class LinkedList 
 {
 public:
@@ -55,5 +57,6 @@ private:
 	Node* head_;
 	Node* tail_;
 };
+}
 
 #endif // LINKED_LIST_H
