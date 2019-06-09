@@ -13,7 +13,7 @@
 #include <string>
 
 //constructor
-LinkedList::LinkedList() 
+data_structure::LinkedList::LinkedList() 
 {
 	head_ = nullptr;
 	tail_ = nullptr;
@@ -23,18 +23,18 @@ LinkedList::LinkedList()
 /* rule of 3 */
 
 /*
-LinkedList::LinkedList(const LinkedList& other) 
+data_structure::LinkedList(const data_structure::LinkedList& other) 
 {
 }
 */
 
 /*
-LinkedList& LinkedList::operator=(const LinkedList& other) 
+data_structure::LinkedList::operator=(const data_structure::LinkedList& other) 
 {
 }	
 */
 
-LinkedList::~LinkedList() 
+data_structure::LinkedList::~LinkedList() 
 {
 	Node* current = head_;
 	while (current != nullptr) {
@@ -45,12 +45,12 @@ LinkedList::~LinkedList()
 }
 
 /* class methods */
-bool LinkedList::isEmpty() const 
+bool data_structure::LinkedList::isEmpty() const 
 {
 	return head_ == nullptr;
 }
 
-int LinkedList::getSize() const 
+int data_structure::LinkedList::getSize() const 
 {
 	if (isEmpty()) 
 	{
@@ -69,7 +69,7 @@ int LinkedList::getSize() const
 	}
 }
 
-void LinkedList::appendNode(const int id) 
+void data_structure::LinkedList::appendNode(const int id) 
 {
 	Node* current = new Node(id);
 	if (isEmpty()) 
@@ -86,7 +86,7 @@ void LinkedList::appendNode(const int id)
 	}
 }
 
-void LinkedList::prependNode(const int id) 
+void data_structure::LinkedList::prependNode(const int id) 
 {
 	Node* current = new Node(id);
 	if (isEmpty()) 
@@ -103,7 +103,7 @@ void LinkedList::prependNode(const int id)
 	}
 }
 
-void LinkedList::insertNode(const int id, int position) 
+void data_structure::LinkedList::insertNode(const int id, int position) 
 {
 	if (position == 0) 
 	{
@@ -130,7 +130,7 @@ void LinkedList::insertNode(const int id, int position)
 	}
 }
 
-void LinkedList::removeNode(const int id) 
+void data_structure::LinkedList::removeNode(const int id) 
 {
 	if (isEmpty()) 
 	{
@@ -183,7 +183,7 @@ void LinkedList::removeNode(const int id)
 	}
 }
 
-void LinkedList::printLinkedList() const 
+void data_structure::LinkedList::printLinkedList() const 
 {
 	if (isEmpty()) 
 	{
@@ -205,7 +205,7 @@ void LinkedList::printLinkedList() const
 	}
 }
 
-void LinkedList::loadNodes(std::ifstream& infile) 
+void data_structure::LinkedList::loadNodes(std::ifstream& infile) 
 {
 	if (!infile.is_open()) 
 	{
@@ -234,7 +234,7 @@ void LinkedList::loadNodes(std::ifstream& infile)
 }
 
 //recursively reverse the Linked List
-void LinkedList::reverseLinkedList() 
+void data_structure::LinkedList::reverseLinkedList() 
 {
 	if (head_ == tail_) 
 	{
@@ -249,7 +249,7 @@ void LinkedList::reverseLinkedList()
 }
 
 /*
-void mergeSortLinkedList()
+void data_structure::LinkedList::mergerSort()
 {
 }
 */
