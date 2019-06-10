@@ -6,8 +6,8 @@
  
 int main(int argc, char* argv[])
 {
-	data_structure::LinkedList linked_list;
-
+	data_structure::LinkedList<char> linked_list;
+/*
 	linked_list.appendNode(3);
 	linked_list.appendNode(4);
 	linked_list.printLinkedList();
@@ -22,6 +22,27 @@ int main(int argc, char* argv[])
 	linked_list.printLinkedList();
 
 	linked_list.removeNode(6);
+	linked_list.printLinkedList();
+
+	linked_list.reverseLinkedList();
+	std::cout << "Reversing Linked List." << std::endl;
+	linked_list.printLinkedList();
+*/
+
+	linked_list.appendNode('c');
+	linked_list.appendNode('d');
+	linked_list.printLinkedList();
+
+	linked_list.prependNode('a');
+	linked_list.printLinkedList();
+
+	linked_list.insertNode('b', 1);
+	linked_list.printLinkedList();
+
+	linked_list.insertNode('f', 2);
+	linked_list.printLinkedList();
+
+	linked_list.removeNode('f');
 	linked_list.printLinkedList();
 
 	linked_list.reverseLinkedList();

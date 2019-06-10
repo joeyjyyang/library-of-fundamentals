@@ -13,7 +13,8 @@
 #include <string>
 
 //constructor
-data_structure::LinkedList::LinkedList() 
+template <class T>
+data_structure::LinkedList<T>::LinkedList() 
 {
 	head_ = nullptr;
 	tail_ = nullptr;
@@ -23,18 +24,21 @@ data_structure::LinkedList::LinkedList()
 /* rule of 3 */
 
 /*
-data_structure::LinkedList(const data_structure::LinkedList& other) 
+template <class T>
+data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList& other) 
 {
 }
 */
 
 /*
-data_structure::LinkedList::operator=(const data_structure::LinkedList& other) 
+template <class T>
+data_structure::LinkedList<T>::operator=(const data_structure::LinkedList& other) 
 {
 }	
 */
 
-data_structure::LinkedList::~LinkedList() 
+template <class T>
+data_structure::LinkedList<T>::~LinkedList() 
 {
 	Node* current = head_;
 	while (current != nullptr) {
@@ -45,12 +49,14 @@ data_structure::LinkedList::~LinkedList()
 }
 
 /* class methods */
-bool data_structure::LinkedList::isEmpty() const 
+template <class T>
+bool data_structure::LinkedList<T>::isEmpty() const 
 {
 	return head_ == nullptr;
 }
 
-int data_structure::LinkedList::getSize() const 
+template <class T>
+int data_structure::LinkedList<T>::getSize() const 
 {
 	if (isEmpty()) 
 	{
@@ -69,7 +75,8 @@ int data_structure::LinkedList::getSize() const
 	}
 }
 
-void data_structure::LinkedList::appendNode(const int id) 
+template <class T>
+void data_structure::LinkedList<T>::appendNode(const T id) 
 {
 	Node* current = new Node(id);
 	if (isEmpty()) 
@@ -86,7 +93,8 @@ void data_structure::LinkedList::appendNode(const int id)
 	}
 }
 
-void data_structure::LinkedList::prependNode(const int id) 
+template <class T>
+void data_structure::LinkedList<T>::prependNode(const T id) 
 {
 	Node* current = new Node(id);
 	if (isEmpty()) 
@@ -103,7 +111,8 @@ void data_structure::LinkedList::prependNode(const int id)
 	}
 }
 
-void data_structure::LinkedList::insertNode(const int id, int position) 
+template <class T>
+void data_structure::LinkedList<T>::insertNode(const T id, int position) 
 {
 	if (position == 0) 
 	{
@@ -130,7 +139,8 @@ void data_structure::LinkedList::insertNode(const int id, int position)
 	}
 }
 
-void data_structure::LinkedList::removeNode(const int id) 
+template <class T>
+void data_structure::LinkedList<T>::removeNode(const T id) 
 {
 	if (isEmpty()) 
 	{
@@ -183,7 +193,8 @@ void data_structure::LinkedList::removeNode(const int id)
 	}
 }
 
-void data_structure::LinkedList::printLinkedList() const 
+template <class T>
+void data_structure::LinkedList<T>::printLinkedList() const 
 {
 	if (isEmpty()) 
 	{
@@ -205,7 +216,8 @@ void data_structure::LinkedList::printLinkedList() const
 	}
 }
 
-void data_structure::LinkedList::loadNodes(std::ifstream& infile) 
+template <class T>
+void data_structure::LinkedList<T>::loadNodes(std::ifstream& infile) 
 {
 	if (!infile.is_open()) 
 	{
@@ -234,7 +246,8 @@ void data_structure::LinkedList::loadNodes(std::ifstream& infile)
 }
 
 //recursively reverse the Linked List
-void data_structure::LinkedList::reverseLinkedList() 
+template <class T>
+void data_structure::LinkedList<T>::reverseLinkedList() 
 {
 	if (head_ == tail_) 
 	{
@@ -249,7 +262,12 @@ void data_structure::LinkedList::reverseLinkedList()
 }
 
 /*
-void data_structure::LinkedList::mergerSort()
+template <class T>
+void data_structure::LinkedList<T>::mergerSort()
 {
 }
 */
+
+//force instantiation of template into current compilation unit
+template class data_structure::LinkedList<char>;
+
