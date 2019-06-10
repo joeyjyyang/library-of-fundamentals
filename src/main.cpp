@@ -49,5 +49,11 @@ int main(int argc, char* argv[])
 	std::cout << "Reversing Linked List." << std::endl;
 	linked_list.printLinkedList();
 
+	linked_list.getNodeID(0);
+	linked_list.getNodeID(1);
+	linked_list.getNodeID(2);
+	linked_list.getNodeID(3);
+	linked_list.getNodeID(4);
+
 	return 0;
 }

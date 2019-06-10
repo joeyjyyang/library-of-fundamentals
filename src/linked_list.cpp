@@ -9,9 +9,6 @@
 
 #include "linked_list.h"
 
-#include <cstdlib>
-#include <string>
-
 //constructor
 template <class T>
 data_structure::LinkedList<T>::LinkedList() 
@@ -76,6 +73,36 @@ int data_structure::LinkedList<T>::getSize() const
 }
 
 template <class T>
+T data_structure::LinkedList<T>::getNodeID(const int position) const
+{
+	if (position == 0) 
+	{
+		std::cout << head_->id_ << std::endl;
+		return head_->id_;
+	}
+	else if (position == getSize() - 1) 
+	{
+		std::cout << tail_->id_ << std::endl;
+		return tail_->id_;
+	}
+	else if (position > getSize() - 1 || position < 0) 
+	{
+		std::cout << "Error: the node position is invalid." << std::endl;
+		return 0;
+	}
+	else 
+	{
+		Node* current = head_;
+		for (int current_position = 0; current_position < position; current_position++) {
+			current = current->next_;
+		}
+		std::cout << current->id_ << std::endl;
+		return current->id_;
+	}
+
+}
+
+template <class T>
 void data_structure::LinkedList<T>::appendNode(const T id) 
 {
 	Node* current = new Node(id);
@@ -112,7 +139,7 @@ void data_structure::LinkedList<T>::prependNode(const T id)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::insertNode(const T id, int position) 
+void data_structure::LinkedList<T>::insertNode(const T id, const int position) 
 {
 	if (position == 0) 
 	{
