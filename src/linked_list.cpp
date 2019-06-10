@@ -77,12 +77,12 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 {
 	if (position == 0) 
 	{
-		std::cout << head_->id_ << std::endl;
+		std::cout << "Node {id: " << head_->id_ << "} is located at position " << position << std::endl;
 		return head_->id_;
 	}
 	else if (position == getSize() - 1) 
 	{
-		std::cout << tail_->id_ << std::endl;
+		std::cout << "Node {id: " << tail_->id_ << "} is located at position " << position << std::endl;
 		return tail_->id_;
 	}
 	else if (position > getSize() - 1 || position < 0) 
@@ -96,7 +96,7 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 		for (int current_position = 0; current_position < position; current_position++) {
 			current = current->next_;
 		}
-		std::cout << current->id_ << std::endl;
+		std::cout << "Node {id: " << current->id_ << "} is located at position " << position << std::endl;
 		return current->id_;
 	}
 
