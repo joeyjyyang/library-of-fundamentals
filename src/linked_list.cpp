@@ -103,7 +103,7 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 }
 
 template <class T>
-void data_structure::LinkedList<T>::appendNode(const T id) 
+void data_structure::LinkedList<T>::appendNode(const T& id) 
 {
 	Node* current = new Node(id);
 	if (isEmpty()) 
@@ -121,7 +121,7 @@ void data_structure::LinkedList<T>::appendNode(const T id)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::prependNode(const T id) 
+void data_structure::LinkedList<T>::prependNode(const T& id) 
 {
 	Node* current = new Node(id);
 	if (isEmpty()) 
@@ -139,7 +139,7 @@ void data_structure::LinkedList<T>::prependNode(const T id)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::insertNode(const T id, const int position) 
+void data_structure::LinkedList<T>::insertNode(const T& id, const int position) 
 {
 	if (position == 0) 
 	{
@@ -167,7 +167,7 @@ void data_structure::LinkedList<T>::insertNode(const T id, const int position)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::removeNode(const T id) 
+void data_structure::LinkedList<T>::removeNode(const T& id) 
 {
 	if (isEmpty()) 
 	{
