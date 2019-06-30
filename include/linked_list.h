@@ -25,7 +25,7 @@ public:
 	LinkedList();
 
 	/* rule of 3 */
-	explicit LinkedList(const LinkedList& other);
+	LinkedList(const LinkedList& other);
 	LinkedList& operator=(const LinkedList& other);
 	~LinkedList();
 
