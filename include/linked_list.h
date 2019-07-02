@@ -33,10 +33,10 @@ public:
 	bool isEmpty() const;
 	int getSize() const;
 	T getNodeID(const int position) const;
-	void appendNode(const T id);
-	void prependNode(const T id);
-	void insertNode(const T id, const int position);
-	void removeNode(const T id);
+	void appendNode(const T& id);
+	void prependNode(const T& id);
+	void insertNode(const T& id, const int position);
+	void removeNode(const T& id);
 	void printLinkedList() const;
 	void loadNodes(std::ifstream& nodes_infile);
 	//recursively reverse the Linked List
