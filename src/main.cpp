@@ -6,8 +6,9 @@
  
 int main(int argc, char* argv[])
 {
-	data_structure::LinkedList<char> linked_list;
 /*
+	data_structure::LinkedList<char> linked_list;
+   	
 	linked_list.appendNode(3);
 	linked_list.appendNode(4);
 	linked_list.printLinkedList();
@@ -29,6 +30,8 @@ int main(int argc, char* argv[])
 	linked_list.printLinkedList();
 */
 
+	data_structure::LinkedList<char> linked_list;
+	
 	linked_list.appendNode('c');
 	linked_list.appendNode('d');
 	linked_list.printLinkedList();
@@ -55,5 +58,7 @@ int main(int argc, char* argv[])
 	linked_list.getNodeID(3);
 	linked_list.getNodeID(4);
 
+	//data_structure::LinkedList<char> test(linked_list);
+	
 	return 0;
 }
