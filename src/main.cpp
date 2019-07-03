@@ -34,28 +34,37 @@ int main(int argc, char* argv[])
 	linked_list.appendNode('c');
 	linked_list.appendNode('d');
 	linked_list.printLinkedList();
+	std::cout << "--------------" << std::endl;
 
 	linked_list.prependNode('a');
 	linked_list.printLinkedList();
+	std::cout << "--------------" << std::endl;
 
 	linked_list.insertNode('b', 1);
 	linked_list.printLinkedList();
+	std::cout << "--------------" << std::endl;
 
 	linked_list.insertNode('f', 2);
 	linked_list.printLinkedList();
+	std::cout << "--------------" << std::endl;
 
 	linked_list.removeNode('f');
 	linked_list.printLinkedList();
+	std::cout << "--------------" << std::endl;
 
 	linked_list.reverseLinkedList();
 	std::cout << "Reversing Linked List." << std::endl;
 	linked_list.printLinkedList();
+	std::cout << "--------------" << std::endl;
 
 	linked_list.getNodeID(0);
 	linked_list.getNodeID(1);
 	linked_list.getNodeID(2);
 	linked_list.getNodeID(3);
 	linked_list.getNodeID(4);
+	std::cout << "--------------" << std::endl;
+
+	data_structure::LinkedList<char> test(linked_list);
 
 	return 0;
 }

@@ -1,10 +1,10 @@
 /*
-	File: linked_list.h
-
-	Description: linked list header file; contains function declarations.
-
-	Author: Joey Yang
-*/
+ *	File: linked_list.h
+ *
+ *	Description: linked list header file; contains function declarations.
+ *
+ *	Author: Joey Yang
+ */
 
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
@@ -21,12 +21,15 @@ template <class T>
 class LinkedList 
 {
 public:
-	//constructor
+	//ctor
 	LinkedList();
 
 	/* rule of 3 */
+	//copy ctor
 	LinkedList(const LinkedList& other);
+	//copy assignment operator
 	LinkedList& operator=(const LinkedList& other);
+	//dtor
 	~LinkedList();
 
 	/* class methods */
@@ -38,10 +41,10 @@ public:
 	void insertNode(const T& id, const int position);
 	void removeNode(const T& id);
 	void printLinkedList() const;
-	void loadNodes(std::ifstream& nodes_infile);
+	//void loadNodes(std::ifstream& nodes_infile);
 	//recursively reverse the Linked List
 	void reverseLinkedList();
-	void mergeSortLinkedList();
+	//void mergeSortLinkedList();
 
 private:
 	struct Node

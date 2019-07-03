@@ -1,11 +1,13 @@
 /*
-	File: linked_list.cpp
+ *	File: linked_list.cpp
+ *
+ *	Author: Joey Yang
+ *
+ *	Description: linked list class file; contains function definitions.
+ *	Implementation of a linked list.
+ */
 
-	Author: Joey Yang
-
-	Description: linked list class file; contains function definitions.
-	Implementation of a linked list.
-*/
+#include <string>
 
 #include "linked_list.h"
 
@@ -20,21 +22,21 @@ data_structure::LinkedList<T>::LinkedList() :
 
 /* rule of 3 */
 
-/*
-//copy constructor
+//copy ctor
 template <class T>
-data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList& other) :
+data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T>& other) :
 	head_(nullptr),
 	tail_(nullptr)
 {
+	std::cout << "Linked List object copy constructor called." << std::endl; 
 }
-*/
 
 /*
 //copy assignment operator
 template <class T>
-data_structure::LinkedList<T>::operator=(const data_structure::LinkedList& other) 
+data_structure::LinkedList<T>::operator=(const data_structure::LinkedList<T>& other) 
 {
+	return *this;
 }	
 */
 
@@ -235,7 +237,6 @@ void data_structure::LinkedList<T>::printLinkedList() const
 	else 
 	{
 		Node* current = head_;
-		std::cout << "-------------------------------" << std::endl;
 		std::cout << "Printing nodes of Linked List." << std::endl;
 		int position = 0;
 		while (current != nullptr) 
@@ -244,10 +245,10 @@ void data_structure::LinkedList<T>::printLinkedList() const
 			current = current->next_;
 			position++;
 		}
-		std::cout << "-------------------------------" << std::endl;	
 	}
 }
 
+/*
 template <class T>
 void data_structure::LinkedList<T>::loadNodes(std::ifstream& infile) 
 {
@@ -276,6 +277,7 @@ void data_structure::LinkedList<T>::loadNodes(std::ifstream& infile)
 		}
 	}
 }
+*/
 
 //recursively reverse the Linked List
 template <class T>
@@ -300,6 +302,8 @@ void data_structure::LinkedList<T>::mergerSort()
 }
 */
 
-//force instantiation of template into current compilation unit
+//explicit instantiation of template into current compilation unit
 template class data_structure::LinkedList<char>;
-
+template class data_structure::LinkedList<int>;
+template class data_structure::LinkedList<double>;
+template class data_structure::LinkedList<std::string>;
