@@ -65,6 +65,10 @@ int main(int argc, char* argv[])
 	std::cout << "--------------" << std::endl;
 
 	data_structure::LinkedList<char> test(linked_list);
+	test.printLinkedList();
+		
+	test = linked_list;
+	test.printLinkedList();
 
 	return 0;
 }

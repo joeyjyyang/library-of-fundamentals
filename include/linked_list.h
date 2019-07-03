@@ -26,9 +26,9 @@ public:
 
 	/* rule of 3 */
 	//copy ctor
-	LinkedList(const LinkedList& other);
+	LinkedList(const LinkedList<T>& other);
 	//copy assignment operator
-	LinkedList& operator=(const LinkedList& other);
+	LinkedList<T>& operator=(const LinkedList<T>& other);
 	//dtor
 	~LinkedList();
 
@@ -59,7 +59,7 @@ private:
 		}
 
 		Node(const T id) : 
-			id_(id), 
+			id_(0), 
 			next_(nullptr) 
 		{
 		}

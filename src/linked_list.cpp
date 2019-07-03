@@ -31,14 +31,13 @@ data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T>& o
 	std::cout << "Linked List object copy constructor called." << std::endl; 
 }
 
-/*
 //copy assignment operator
 template <class T>
-data_structure::LinkedList<T>::operator=(const data_structure::LinkedList<T>& other) 
+data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(const data_structure::LinkedList<T>& other) 
 {
+	std::cout << "Linked List object copy assignment operator called." << std::endl;
 	return *this;
 }	
-*/
 
 //dtor
 template <class T>
