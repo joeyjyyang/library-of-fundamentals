@@ -9,31 +9,36 @@
 
 #include "linked_list.h"
 
-//constructor
+//ctor
 template <class T>
-data_structure::LinkedList<T>::LinkedList() 
+data_structure::LinkedList<T>::LinkedList() :
+	head_(nullptr),
+	tail_(nullptr)
 {
-	head_ = nullptr;
-	tail_ = nullptr;
 	std::cout << "Linked List object instantiated." << std::endl;
 }
 
 /* rule of 3 */
 
 /*
+//copy constructor
 template <class T>
-data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList& other) 
+data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList& other) :
+	head_(nullptr),
+	tail_(nullptr)
 {
 }
 */
 
 /*
+//copy assignment operator
 template <class T>
 data_structure::LinkedList<T>::operator=(const data_structure::LinkedList& other) 
 {
 }	
 */
 
+//dtor
 template <class T>
 data_structure::LinkedList<T>::~LinkedList() 
 {

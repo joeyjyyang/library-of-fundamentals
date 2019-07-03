@@ -50,12 +50,14 @@ private:
 		Node* next_;
 		
 		Node() : 
-			id_(0), next_(nullptr) 
+			id_(0),
+			next_(nullptr) 
 		{
 		}
 
 		Node(const T id) : 
-			id_(id), next_(nullptr) 
+			id_(id), 
+			next_(nullptr) 
 		{
 		}
 	};
