@@ -4,7 +4,7 @@
  * Compile Command: g++ -std=c++11 -I ../include -o main main.cpp linked_list.cpp
  */
  
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 /*
 	data_structure::LinkedList<char> linked_list;

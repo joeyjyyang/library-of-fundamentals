@@ -24,7 +24,7 @@ data_structure::LinkedList<T>::LinkedList() :
 
 //copy ctor
 template <class T>
-data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T>& other) :
+data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T> &other) :
 	head_(nullptr),
 	tail_(nullptr)
 {
@@ -33,7 +33,7 @@ data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T>& o
 
 //copy assignment operator
 template <class T>
-data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(const data_structure::LinkedList<T>& other) 
+data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(const data_structure::LinkedList<T> &other) 
 {
 	std::cout << "Linked List object copy assignment operator called." << std::endl;
 	return *this;
@@ -43,7 +43,7 @@ data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(const da
 template <class T>
 data_structure::LinkedList<T>::~LinkedList() 
 {
-	Node* current = head_;
+	Node *current = head_;
 	while (current != nullptr) {
 		head_ = head_->next_;
 		delete current;
@@ -67,7 +67,7 @@ int data_structure::LinkedList<T>::getSize() const
 	}
 	else 
 	{
-		Node* current = head_;
+		Node *current = head_;
 		int queue_size = 0;
 		while (current != nullptr) 
 		{
@@ -109,9 +109,9 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 }
 
 template <class T>
-void data_structure::LinkedList<T>::appendNode(const T& id) 
+void data_structure::LinkedList<T>::appendNode(const T &id) 
 {
-	Node* current = new Node(id);
+	Node *current = new Node(id);
 	if (isEmpty()) 
 	{
 		std::cout << "Adding first node {id: " << current->id_ << "} to empty Linked List." << std::endl;
@@ -127,9 +127,9 @@ void data_structure::LinkedList<T>::appendNode(const T& id)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::prependNode(const T& id) 
+void data_structure::LinkedList<T>::prependNode(const T &id) 
 {
-	Node* current = new Node(id);
+	Node *current = new Node(id);
 	if (isEmpty()) 
 	{	
 		std::cout << "Adding first node to empty Linked List: " << "id: " << current->id_ << std::endl;
@@ -145,7 +145,7 @@ void data_structure::LinkedList<T>::prependNode(const T& id)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::insertNode(const T& id, const int position) 
+void data_structure::LinkedList<T>::insertNode(const T &id, const int position) 
 {
 	if (position == 0) 
 	{
@@ -161,8 +161,8 @@ void data_structure::LinkedList<T>::insertNode(const T& id, const int position)
 	}
 	else 
 	{
-		Node* current = new Node(id);
-		Node* trail = head_;
+		Node *current = new Node(id);
+		Node *trail = head_;
 		for (int current_position = 0; current_position < position - 1; current_position++) {
 			trail = trail->next_;
 		}
@@ -173,7 +173,7 @@ void data_structure::LinkedList<T>::insertNode(const T& id, const int position)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::removeNode(const T& id) 
+void data_structure::LinkedList<T>::removeNode(const T &id) 
 {
 	if (isEmpty()) 
 	{
@@ -184,14 +184,14 @@ void data_structure::LinkedList<T>::removeNode(const T& id)
 		if (head_->id_ == id) 
 		{
 			std::cout << "Removing node {id: " << head_->id_ << "} from beginning of Linked List." << std::endl;
-			Node* current = head_;
+			Node *current = head_;
 			head_ = head_->next_;
 			delete current;
 		}
 		else if (tail_->id_ == id) 
 		{
 			std::cout << "Removing node {id: " << tail_->id_ << "} from end of Linked List." << std::endl;
-			Node* current = head_;
+			Node *current = head_;
 			while (current->next_ != tail_) 
 			{
 				current = current->next_;
@@ -203,8 +203,8 @@ void data_structure::LinkedList<T>::removeNode(const T& id)
 		}
 		else 
 		{
-			Node* current = head_->next_;
-			Node* trail = head_;
+			Node *current = head_->next_;
+			Node *trail = head_;
 			while (current != nullptr) 
 			{
 				if (current->id_ == id) 
@@ -235,7 +235,7 @@ void data_structure::LinkedList<T>::printLinkedList() const
 	}
 	else 
 	{
-		Node* current = head_;
+		Node *current = head_;
 		std::cout << "Printing nodes of Linked List." << std::endl;
 		int position = 0;
 		while (current != nullptr) 
@@ -249,7 +249,7 @@ void data_structure::LinkedList<T>::printLinkedList() const
 
 /*
 template <class T>
-void data_structure::LinkedList<T>::loadNodes(std::ifstream& infile) 
+void data_structure::LinkedList<T>::loadNodes(std::ifstream &infile) 
 {
 	if (!infile.is_open()) 
 	{
@@ -265,11 +265,11 @@ void data_structure::LinkedList<T>::loadNodes(std::ifstream& infile)
 			{
 				appendNode(atoi(field_id.c_str()));
 			}
-			catch (const std::invalid_argument& ex) 
+			catch (const std::invalid_argument &ex) 
 			{
 				std::cout << "Error: the ID is invalid and could not be converted into a number." << std::endl;
 			}
-			catch (const std::out_of_range& ex) 
+			catch (const std::out_of_range &ex) 
 			{
 				std::cout << "Error: the ID is out of range." << std::endl;
 			}
@@ -286,7 +286,7 @@ void data_structure::LinkedList<T>::reverseLinkedList()
 	{
 		return;
 	}
-	Node* current = head_;
+	Node *current = head_;
 	head_ = current->next_;
 	reverseLinkedList();
 	tail_->next_ = current;
