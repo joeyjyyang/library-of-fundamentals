@@ -26,9 +26,9 @@ public:
 
 	/* rule of 3 */
 	//copy ctor
-	LinkedList(const LinkedList<T>& other);
+	LinkedList(const LinkedList<T> &other);
 	//copy assignment operator
-	LinkedList<T>& operator=(const LinkedList<T>& other);
+	LinkedList<T>& operator=(const LinkedList<T> &other);
 	//dtor
 	~LinkedList();
 
@@ -36,12 +36,12 @@ public:
 	bool isEmpty() const;
 	int getSize() const;
 	T getNodeID(const int position) const;
-	void appendNode(const T& id);
-	void prependNode(const T& id);
-	void insertNode(const T& id, const int position);
-	void removeNode(const T& id);
+	void appendNode(const T &id);
+	void prependNode(const T &id);
+	void insertNode(const T &id, const int position);
+	void removeNode(const T &id);
 	void printLinkedList() const;
-	//void loadNodes(std::ifstream& nodes_infile);
+	//void loadNodes(std::ifstream &nodes_infile);
 	//recursively reverse the Linked List
 	void reverseLinkedList();
 	//void mergeSortLinkedList();
@@ -50,7 +50,7 @@ private:
 	struct Node
 	{
 		const T id_;
-		Node* next_;
+		Node *next_;
 		
 		Node() : 
 			id_(0),
@@ -59,14 +59,14 @@ private:
 		}
 
 		Node(const T id) : 
-			id_(0), 
+			id_(id), 
 			next_(nullptr) 
 		{
 		}
 	};
 
-	Node* head_;
-	Node* tail_;
+	Node *head_;
+	Node *tail_;
 };
 }
 

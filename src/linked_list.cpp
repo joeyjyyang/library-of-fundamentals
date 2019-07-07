@@ -28,6 +28,10 @@ data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T> &o
 	head_(nullptr),
 	tail_(nullptr)
 {
+	for (Node *current = other.head_; current; current = current->next_)
+	{
+		appendNode(current->id_);
+	}
 	std::cout << "Linked List object copy constructor called." << std::endl; 
 }
 

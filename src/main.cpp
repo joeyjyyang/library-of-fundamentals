@@ -66,9 +66,10 @@ int main(int argc, char *argv[])
 
 	data_structure::LinkedList<char> test(linked_list);
 	test.printLinkedList();
-		
-	test = linked_list;
-	test.printLinkedList();
+	std::cout << "--------------" << std::endl;
+
+	//test = linked_list;
+	//test.printLinkedList();
 
 	return 0;
 }
