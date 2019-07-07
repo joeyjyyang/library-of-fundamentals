@@ -64,12 +64,17 @@ int main(int argc, char *argv[])
 	linked_list.getNodeID(4);
 	std::cout << "--------------" << std::endl;
 
-	data_structure::LinkedList<char> test(linked_list);
-	test.printLinkedList();
+	data_structure::LinkedList<char> dummy_list1(linked_list);
+	dummy_list1.printLinkedList();
 	std::cout << "--------------" << std::endl;
 
-	//test = linked_list;
-	//test.printLinkedList();
+	data_structure::LinkedList<char> dummy_list2;
+	dummy_list2 = linked_list;
+	dummy_list2.printLinkedList();
+	std::cout << "--------------" << std::endl;
+
+	//swapContents(linked_list, dummy_list1);
+	swapContents(linked_list);
 
 	return 0;
 }

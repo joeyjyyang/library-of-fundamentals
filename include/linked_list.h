@@ -17,6 +17,15 @@
 
 namespace data_structure
 {
+	template <class T>
+	class LinkedList;
+}
+
+template <class T>
+void swapContents(data_structure::LinkedList<T> &linked_list1);
+
+namespace data_structure
+{
 template <class T>
 class LinkedList 
 {
@@ -24,15 +33,21 @@ public:
 	//ctor
 	LinkedList();
 
-	/* rule of 3 */
+	//rule of 3
+	
 	//copy ctor
 	LinkedList(const LinkedList<T> &other);
 	//copy assignment operator
-	LinkedList<T>& operator=(const LinkedList<T> &other);
+	LinkedList<T>& operator=(LinkedList<T> other);
 	//dtor
 	~LinkedList();
-
-	/* class methods */
+	
+	//friend swap function
+	template <class U>
+	friend void ::swapContents(LinkedList<U> &linked_list1);
+	
+	//class methods
+	
 	bool isEmpty() const;
 	int getSize() const;
 	T getNodeID(const int position) const;

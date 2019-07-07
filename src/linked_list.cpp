@@ -8,6 +8,7 @@
  */
 
 #include <string>
+#include <algorithm>
 
 #include "linked_list.h"
 
@@ -20,7 +21,7 @@ data_structure::LinkedList<T>::LinkedList() :
 	std::cout << "Linked List object instantiated." << std::endl;
 }
 
-/* rule of 3 */
+//rule of 3
 
 //copy ctor
 template <class T>
@@ -28,18 +29,23 @@ data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T> &o
 	head_(nullptr),
 	tail_(nullptr)
 {
-	for (Node *current = other.head_; current; current = current->next_)
+	Node *current = other.head_;
+	while (current != nullptr)
 	{
 		appendNode(current->id_);
+		current = current->next_;
 	}
 	std::cout << "Linked List object copy constructor called." << std::endl; 
 }
 
 //copy assignment operator
+//implicitly calls the copy ctor (pass by value) and uses the copy-and-swap idiom
 template <class T>
-data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(const data_structure::LinkedList<T> &other) 
+data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(data_structure::LinkedList<T> other)  
 {
 	std::cout << "Linked List object copy assignment operator called." << std::endl;
+	//swap(*this, other); 
+
 	return *this;
 }	
 
@@ -48,14 +54,24 @@ template <class T>
 data_structure::LinkedList<T>::~LinkedList() 
 {
 	Node *current = head_;
-	while (current != nullptr) {
+	while (current != nullptr) 
+	{
 		head_ = head_->next_;
 		delete current;
 		current = head_;
 	}
 }
 
-/* class methods */
+//friend swap function
+template <class U>
+//void swapContents(data_structure::LinkedList<T> &linked_list1, data_structure::LinkedList<T> &linked_list2)
+void swapContents(data_structure::LinkedList<U> &linked_list1)
+{
+	std::cout << "test" << std::endl;
+}
+
+//class methods 
+
 template <class T>
 bool data_structure::LinkedList<T>::isEmpty() const 
 {
@@ -103,7 +119,8 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 	else 
 	{
 		Node* current = head_;
-		for (int current_position = 0; current_position < position; current_position++) {
+		for (int current_position = 0; current_position < position; current_position++) 
+		{
 			current = current->next_;
 		}
 		std::cout << "Node {id: " << current->id_ << "} is located at position " << position << std::endl;
@@ -167,7 +184,8 @@ void data_structure::LinkedList<T>::insertNode(const T &id, const int position)
 	{
 		Node *current = new Node(id);
 		Node *trail = head_;
-		for (int current_position = 0; current_position < position - 1; current_position++) {
+		for (int current_position = 0; current_position < position - 1; current_position++) 
+		{
 			trail = trail->next_;
 		}
 		std::cout << "Inserting new node {id: " << current->id_ << "} to Linked List at position " << position << std::endl;
@@ -310,3 +328,5 @@ template class data_structure::LinkedList<char>;
 template class data_structure::LinkedList<int>;
 template class data_structure::LinkedList<double>;
 template class data_structure::LinkedList<std::string>;
+
+template void swapContents(data_structure::LinkedList<char> &linked_list1);
