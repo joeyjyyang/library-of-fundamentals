@@ -69,11 +69,14 @@ int main(int argc, char *argv[])
 	std::cout << "--------------" << std::endl;
 
 	data_structure::LinkedList<char> dummy_list2;
-	dummy_list2 = linked_list;
 	dummy_list2.printLinkedList();
+	linked_list.printLinkedList();
 	std::cout << "--------------" << std::endl;
 
-	swapContents(linked_list, dummy_list1);
+	dummy_list2 = linked_list;
+	dummy_list2.printLinkedList();
+	linked_list.printLinkedList();
+	std::cout << "--------------" << std::endl;
 
 	return 0;
 }

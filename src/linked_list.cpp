@@ -41,10 +41,10 @@ data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T> &o
 //copy assignment operator
 //implicitly calls the copy ctor (pass by value) and uses the copy-and-swap idiom
 template <class T>
-data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(data_structure::LinkedList<T> other)  
+data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(data_structure::LinkedList<T> other) 
 {
 	std::cout << "Linked List object copy assignment operator called." << std::endl;
-	//swap(*this, other); 
+	swapContents(*this, other); 
 
 	return *this;
 }	
@@ -64,9 +64,10 @@ data_structure::LinkedList<T>::~LinkedList()
 
 //friend swap function
 template <class U>
-//void swapContents(data_structure::LinkedList<T> &linked_list1, data_structure::LinkedList<T> &linked_list2)
 void swapContents(data_structure::LinkedList<U> &linked_list1, data_structure::LinkedList<U> &linked_list2)
 {
+	std::swap(linked_list1.head_, linked_list2.head_);
+	std::swap(linked_list1.tail_, linked_list2.tail_);
 	std::cout << "test" << std::endl;
 }
 
