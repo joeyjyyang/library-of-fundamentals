@@ -60,6 +60,7 @@ data_structure::LinkedList<T>::~LinkedList()
 		delete current;
 		current = head_;
 	}
+	std::cout << "Linked List object destructor called." << std::endl;
 }
 
 //friend swap function
@@ -68,7 +69,6 @@ void swapContents(data_structure::LinkedList<U> &linked_list1, data_structure::L
 {
 	std::swap(linked_list1.head_, linked_list2.head_);
 	std::swap(linked_list1.tail_, linked_list2.tail_);
-	std::cout << "test" << std::endl;
 }
 
 //class methods 
