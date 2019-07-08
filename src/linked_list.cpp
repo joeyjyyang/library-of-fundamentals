@@ -65,7 +65,7 @@ data_structure::LinkedList<T>::~LinkedList()
 //friend swap function
 template <class U>
 //void swapContents(data_structure::LinkedList<T> &linked_list1, data_structure::LinkedList<T> &linked_list2)
-void swapContents(data_structure::LinkedList<U> &linked_list1)
+void swapContents(data_structure::LinkedList<U> &linked_list1, data_structure::LinkedList<U> &linked_list2)
 {
 	std::cout << "test" << std::endl;
 }
@@ -329,4 +329,7 @@ template class data_structure::LinkedList<int>;
 template class data_structure::LinkedList<double>;
 template class data_structure::LinkedList<std::string>;
 
-template void swapContents(data_structure::LinkedList<char> &linked_list1);
+template void swapContents(data_structure::LinkedList<char> &linked_list1, data_structure::LinkedList<char> &linked_list2);
+template void swapContents(data_structure::LinkedList<int> &linked_list1, data_structure::LinkedList<int> &linked_list2);
+template void swapContents(data_structure::LinkedList<double> &linked_list1, data_structure::LinkedList<double> &linked_list2);
+template void swapContents(data_structure::LinkedList<std::string> &linked_list1, data_structure::LinkedList<std::string> &linked_list2);

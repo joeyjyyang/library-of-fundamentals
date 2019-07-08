@@ -15,14 +15,15 @@
 #include <string>
 #include <cstdlib>
 
+//forward declaration 
 namespace data_structure
 {
 	template <class T>
 	class LinkedList;
 }
 
-template <class T>
-void swapContents(data_structure::LinkedList<T> &linked_list1);
+template <class U>
+void swapContents(data_structure::LinkedList<U> &linked_list1, data_structure::LinkedList<U> &linked_list2);
 
 namespace data_structure
 {
@@ -44,7 +45,7 @@ public:
 	
 	//friend swap function
 	template <class U>
-	friend void ::swapContents(LinkedList<U> &linked_list1);
+	friend void ::swapContents(LinkedList<U> &linked_list1, LinkedList<U> &linked_list2);
 	
 	//class methods
 	

@@ -73,8 +73,7 @@ int main(int argc, char *argv[])
 	dummy_list2.printLinkedList();
 	std::cout << "--------------" << std::endl;
 
-	//swapContents(linked_list, dummy_list1);
-	swapContents(linked_list);
+	swapContents(linked_list, dummy_list1);
 
 	return 0;
 }
