@@ -77,12 +77,17 @@ int main(int argc, char *argv[])
 		dummy_list1.appendNode('a');
 		dummy_list1.prependNode('f');
 		dummy_list1.printLinkedList();
+		std::cout << "--------------" << std::endl;
 
 		data_structure::LinkedList<int> dummy_list2;
 	
 		dummy_list2.appendNode(13);
 		dummy_list2.insertNode(2, 0);
 		dummy_list2.printLinkedList();
+		std::cout << "--------------" << std::endl;
+
+		data_structure::LinkedList<int> dummy_list3(dummy_list2);
+		//dummy_list3 = dummy_list1;
 	}
 
 	return 0;
