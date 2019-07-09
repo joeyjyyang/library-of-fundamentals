@@ -8,86 +8,81 @@ int main(int argc, char *argv[])
 {
 	std::cout << "------Test Case #1------" << std::endl;
 	{
-		data_structure::LinkedList<int> linked_list;
+		data_structure::LinkedList<int> dummy_list1;
 	
-		linked_list.appendNode(3);
-		linked_list.appendNode(4);
-		linked_list.printLinkedList();
+		dummy_list1.appendNode(3);
+		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 
-		linked_list.prependNode(1);
-		linked_list.printLinkedList();
+		dummy_list1.prependNode(1);
+		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 
-		linked_list.insertNode(2, 1);
-		linked_list.printLinkedList();
+		dummy_list1.insertNode(2, 1);
+		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 
-		linked_list.insertNode(6, 2);
-		linked_list.printLinkedList();
+		dummy_list1.insertNode(6, 2);
+		dummy_list1.printLinkedList();
 
-		linked_list.removeNode(6);
-		linked_list.printLinkedList();
+		dummy_list1.removeNode(6);
+		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 
-		linked_list.reverseLinkedList();
+		dummy_list1.reverseLinkedList();
 		std::cout << "Reversing Linked List." << std::endl;
-		linked_list.printLinkedList();
+		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 		
-		linked_list.appendNode(2);
-		linked_list.prependNode(4);
-		linked_list.insertNode(3, 0);
+		dummy_list1.appendNode(2);
+		dummy_list1.prependNode(1);
+		dummy_list1.insertNode(3, 0);
 		std::cout << "--------------" << std::endl;
 
-		linked_list.getNodeID(0);
-		linked_list.getNodeID(1);
-		linked_list.getNodeID(2);
-		linked_list.getNodeID(3);
-		linked_list.getNodeID(4);
+		dummy_list1.getNodeID(0);
+		dummy_list1.getNodeID(1);
+		dummy_list1.getNodeID(2);
+		dummy_list1.getNodeID(3);
 		std::cout << "--------------" << std::endl;
 	}
 	std::cout << "------Test Case #2------" << std::endl;
 	{
-		data_structure::LinkedList<char> linked_list;
+		data_structure::LinkedList<char> dummy_list1;
 		
-		linked_list.appendNode('c');
-		linked_list.appendNode('d');
-		linked_list.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
-		linked_list.prependNode('a');
-		linked_list.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
-		linked_list.insertNode('b', 1);
-		linked_list.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
-		linked_list.insertNode('f', 2);
-		linked_list.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
-		linked_list.removeNode('f');
-		linked_list.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
-		linked_list.reverseLinkedList();
+		dummy_list1.appendNode('c');
+		dummy_list1.appendNode('d');
+		dummy_list1.prependNode('a');
+		dummy_list1.insertNode('b', 1);
+		dummy_list1.reverseLinkedList();
 		std::cout << "Reversing Linked List." << std::endl;
-		linked_list.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
-		data_structure::LinkedList<char> dummy_list1(linked_list);
-		dummy_list1.removeNode('c');
 		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 
+		data_structure::LinkedList<char> dummy_list3(dummy_list1);
+		dummy_list3.removeNode('c');
+		dummy_list3.printLinkedList();
+		std::cout << "--------------" << std::endl;
+
 		data_structure::LinkedList<char> dummy_list2;
-		dummy_list2 = dummy_list2;
+		dummy_list2 = dummy_list3;
 		dummy_list2.reverseLinkedList();
 		std::cout << "Reversing Linked List." << std::endl;
 		dummy_list2.printLinkedList();
 		std::cout << "--------------" << std::endl;
+	}
+	std::cout << "------Test Case #3------" << std::endl;
+	{
+		data_structure::LinkedList<char> dummy_list1;
+
+		dummy_list1.appendNode('a');
+		dummy_list1.prependNode('f');
+		dummy_list1.printLinkedList();
+
+		data_structure::LinkedList<int> dummy_list2;
+	
+		dummy_list2.appendNode(13);
+		dummy_list2.insertNode(2, 0);
+		dummy_list2.printLinkedList();
 	}
 
 	return 0;
