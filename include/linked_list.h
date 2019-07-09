@@ -50,6 +50,7 @@ public:
 	//class methods
 	
 	bool isEmpty() const;
+	bool isUnique(const T &id) const;
 	int getSize() const;
 	T getNodeID(const int position) const;
 	void appendNode(const T &id);

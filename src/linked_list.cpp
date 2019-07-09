@@ -80,6 +80,24 @@ bool data_structure::LinkedList<T>::isEmpty() const
 }
 
 template <class T>
+bool data_structure::LinkedList<T>::isUnique(const T &id) const
+{
+	Node *current = head_;
+	while (current != nullptr)
+	{
+		if (current->id_ == id)
+		{
+			std::cout << "Error: node {id : " << current->id_ << "} already exists. Nodes must be unique." << std::endl;
+			
+			return false;
+		}
+		current = current->next_;
+	}
+	
+	return true;
+}
+
+template <class T>
 int data_structure::LinkedList<T>::getSize() const 
 {
 	if (isEmpty()) 
@@ -95,6 +113,7 @@ int data_structure::LinkedList<T>::getSize() const
 			current = current->next_;
 			queue_size++;
 		}
+		
 		return queue_size;
 	}
 }
@@ -105,16 +124,19 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 	if (position == 0) 
 	{
 		std::cout << "Node {id: " << head_->id_ << "} is located at position " << position << std::endl;
+		
 		return head_->id_;
 	}
 	else if (position == getSize() - 1) 
 	{
 		std::cout << "Node {id: " << tail_->id_ << "} is located at position " << position << std::endl;
+		
 		return tail_->id_;
 	}
 	else if (position > getSize() - 1 || position < 0) 
 	{
 		std::cout << "Error: the node position is invalid." << std::endl;
+		
 		return 0;
 	}
 	else 
@@ -125,6 +147,7 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 			current = current->next_;
 		}
 		std::cout << "Node {id: " << current->id_ << "} is located at position " << position << std::endl;
+		
 		return current->id_;
 	}
 
@@ -133,36 +156,42 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 template <class T>
 void data_structure::LinkedList<T>::appendNode(const T &id) 
 {
-	Node *current = new Node(id);
-	if (isEmpty()) 
+	if (isUnique(id))
 	{
-		std::cout << "Adding first node {id: " << current->id_ << "} to empty Linked List." << std::endl;
-		head_ = current;
-		tail_ = current;
-	}
-	else 
-	{
-		std::cout << "Adding new node {id: " << current->id_ << "} to end of Linked List." << std::endl;
-		tail_->next_ = current;
-		tail_ = tail_->next_;
+		Node *current = new Node(id);
+		if (isEmpty()) 
+		{
+			std::cout << "Adding first node {id: " << current->id_ << "} to empty Linked List." << std::endl;
+			head_ = current;
+			tail_ = current;
+		}
+		else 
+		{
+			std::cout << "Adding new node {id: " << current->id_ << "} to end of Linked List." << std::endl;
+			tail_->next_ = current;
+			tail_ = tail_->next_;
+		}
 	}
 }
 
 template <class T>
 void data_structure::LinkedList<T>::prependNode(const T &id) 
 {
-	Node *current = new Node(id);
-	if (isEmpty()) 
-	{	
-		std::cout << "Adding first node to empty Linked List: " << "id: " << current->id_ << std::endl;
-		head_ = current;
-		tail_ = current;
-	}
-	else 
-	{
-		std::cout << "Adding new node {id: " << current->id_ << "} to beginning of Linked List." << std::endl;
-		current->next_ = head_;
-		head_ = current;
+	if (isUnique(id))
+		{
+		Node *current = new Node(id);
+		if (isEmpty()) 
+		{	
+			std::cout << "Adding first node to empty Linked List: " << "id: " << current->id_ << std::endl;
+			head_ = current;
+			tail_ = current;
+		}
+		else 
+		{
+			std::cout << "Adding new node {id: " << current->id_ << "} to beginning of Linked List." << std::endl;
+			current->next_ = head_;
+			head_ = current;
+		}
 	}
 }
 
@@ -183,15 +212,18 @@ void data_structure::LinkedList<T>::insertNode(const T &id, const int position)
 	}
 	else 
 	{
-		Node *current = new Node(id);
-		Node *trail = head_;
-		for (int current_position = 0; current_position < position - 1; current_position++) 
+		if (isUnique(id))
 		{
-			trail = trail->next_;
+			Node *current = new Node(id);
+			Node *trail = head_;
+			for (int current_position = 0; current_position < position - 1; current_position++) 
+			{
+				trail = trail->next_;
+			}
+			std::cout << "Inserting new node {id: " << current->id_ << "} to Linked List at position " << position << std::endl;
+			current->next_ = trail->next_;
+			trail->next_ = current;
 		}
-		std::cout << "Inserting new node {id: " << current->id_ << "} to Linked List at position " << position << std::endl;
-		current->next_ = trail->next_;
-		trail->next_ = current;
 	}
 }
 
@@ -236,6 +268,7 @@ void data_structure::LinkedList<T>::removeNode(const T &id)
 					trail->next_ = current->next_;
 					current->next_ = nullptr;
 					delete current;
+					
 					return;
 				}
 				else 
