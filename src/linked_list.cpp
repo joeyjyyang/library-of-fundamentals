@@ -14,9 +14,7 @@
 
 //ctor
 template <class T>
-data_structure::LinkedList<T>::LinkedList() :
-	head_(nullptr),
-	tail_(nullptr)
+data_structure::LinkedList<T>::LinkedList()
 {
 	std::cout << "Linked List object instantiated." << std::endl;
 }

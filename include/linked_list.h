@@ -67,23 +67,16 @@ private:
 	struct Node
 	{
 		const T id_;
-		Node *next_;
-		
-		Node() : 
-			id_(0),
-			next_(nullptr) 
-		{
-		}
+		Node *next_{nullptr};
 
 		Node(const T id) : 
-			id_(id), 
-			next_(nullptr) 
+			id_(id) 
 		{
 		}
 	};
 
-	Node *head_;
-	Node *tail_;
+	Node *head_{nullptr};
+	Node *tail_{nullptr};
 };
 }
 
