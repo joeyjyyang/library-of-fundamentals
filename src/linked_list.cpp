@@ -24,8 +24,8 @@ data_structure::LinkedList<T>::LinkedList()
 //copy ctor
 template <class T>
 data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T> &other) :
-	head_(nullptr),
-	tail_(nullptr)
+	head_{nullptr},
+	tail_{nullptr}
 {
 	Node *current = other.head_;
 	while (current != nullptr)

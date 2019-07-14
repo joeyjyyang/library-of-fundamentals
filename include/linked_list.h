@@ -70,7 +70,7 @@ private:
 		Node *next_{nullptr};
 
 		Node(const T id) : 
-			id_(id) 
+			id_{id} 
 		{
 		}
 	};
