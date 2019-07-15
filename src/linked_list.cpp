@@ -27,7 +27,7 @@ data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T> &o
 	head_{nullptr},
 	tail_{nullptr}
 {
-	Node *current = other.head_;
+	Node *current{other.head_};
 	while (current != nullptr)
 	{
 		appendNode(current->id_);
@@ -51,7 +51,7 @@ data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(data_str
 template <class T>
 data_structure::LinkedList<T>::~LinkedList() 
 {
-	Node *current = head_;
+	Node *current{head_};
 	while (current != nullptr) 
 	{
 		head_ = head_->next_;
@@ -80,7 +80,7 @@ bool data_structure::LinkedList<T>::isEmpty() const
 template <class T>
 bool data_structure::LinkedList<T>::isUnique(const T &id) const
 {
-	Node *current = head_;
+	Node *current{head_};
 	while (current != nullptr)
 	{
 		if (current->id_ == id)
@@ -104,8 +104,8 @@ int data_structure::LinkedList<T>::getSize() const
 	}
 	else 
 	{
-		Node *current = head_;
-		int queue_size = 0;
+		Node *current{head_};
+		int queue_size{}; //zero initialization
 		while (current != nullptr) 
 		{
 			current = current->next_;
@@ -139,7 +139,7 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 	}
 	else 
 	{
-		Node* current = head_;
+		Node* current{head_};
 		for (int current_position = 0; current_position < position; current_position++) 
 		{
 			current = current->next_;
@@ -156,7 +156,7 @@ void data_structure::LinkedList<T>::appendNode(const T &id)
 {
 	if (isUnique(id))
 	{
-		Node *current = new Node(id);
+		Node *current = new Node{id};
 		if (isEmpty()) 
 		{
 			std::cout << "Adding first node {id: " << current->id_ << "} to empty Linked List." << std::endl;
@@ -177,7 +177,7 @@ void data_structure::LinkedList<T>::prependNode(const T &id)
 {
 	if (isUnique(id))
 		{
-		Node *current = new Node(id);
+		Node *current = new Node{id};
 		if (isEmpty()) 
 		{	
 			std::cout << "Adding first node to empty Linked List: " << "id: " << current->id_ << std::endl;
@@ -212,8 +212,8 @@ void data_structure::LinkedList<T>::insertNode(const T &id, const int position)
 	{
 		if (isUnique(id))
 		{
-			Node *current = new Node(id);
-			Node *trail = head_;
+			Node *current = new Node{id};
+			Node *trail{head_};
 			for (int current_position = 0; current_position < position - 1; current_position++) 
 			{
 				trail = trail->next_;
@@ -237,14 +237,14 @@ void data_structure::LinkedList<T>::removeNode(const T &id)
 		if (head_->id_ == id) 
 		{
 			std::cout << "Removing node {id: " << head_->id_ << "} from beginning of Linked List." << std::endl;
-			Node *current = head_;
+			Node *current{head_};
 			head_ = head_->next_;
 			delete current;
 		}
 		else if (tail_->id_ == id) 
 		{
 			std::cout << "Removing node {id: " << tail_->id_ << "} from end of Linked List." << std::endl;
-			Node *current = head_;
+			Node *current{head_};
 			while (current->next_ != tail_) 
 			{
 				current = current->next_;
@@ -256,8 +256,8 @@ void data_structure::LinkedList<T>::removeNode(const T &id)
 		}
 		else 
 		{
-			Node *current = head_->next_;
-			Node *trail = head_;
+			Node *current{head_->next_};
+			Node *trail{head_};
 			while (current != nullptr) 
 			{
 				if (current->id_ == id) 
@@ -289,9 +289,9 @@ void data_structure::LinkedList<T>::printLinkedList() const
 	}
 	else 
 	{
-		Node *current = head_;
+		Node *current{head_};
 		std::cout << "Printing nodes of Linked List." << std::endl;
-		int position = 0;
+		int position{}; //zero initialization
 		while (current != nullptr) 
 		{
 			std::cout << "Node {id: " << current->id_ <<  "} at position: " << position << std::endl;
@@ -340,7 +340,7 @@ void data_structure::LinkedList<T>::reverseLinkedList()
 	{
 		return;
 	}
-	Node *current = head_;
+	Node *current{head_};
 	head_ = current->next_;
 	reverseLinkedList();
 	tail_->next_ = current;
