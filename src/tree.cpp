@@ -4,48 +4,52 @@
 class Node
 {
 public:
-	Node(int value) : value_(value)
+	Node(const int value) : value_(value), right_child_(nullptr), left_child_(nullptr)
 	{
+	}
+
+	void addRight(Node *child)
+	{
+		right_child_ = child;
+	}
+
+	void addLeft(Node *child)
+	{		
+		left_child_ = child;
 	}
 	
-	void addLeft(Node child)
-	{
-		child_nodes_[0];	
-	}
-/*
-	void addRight(Node child)
-	{
-		child_nodes_[1] = child;
-	}
-*/
 	int getValue()
 	{
 		return value_;
 	}
-/*
-	int getLeft()
+
+	void printNodes()
 	{
-		return child_nodes_[0].getValue();
+		std::cout << right_child_->getValue() << std::endl;
+		std::cout << this->getValue() << std::endl;
+		std::cout << left_child_->getValue() << std::endl;
 	}
 
-	int getRight()
-	{
-		return child_nodes_[1].getValue();
-	}
-*/
 	~Node()
 	{
+		delete right_child_, left_child_;
 	}
+	
 private:
 	int value_;
-	std::vector<Node> child_nodes_[2];
+	Node *right_child_;
+	Node *left_child_;
 };
 
 int main(int argc, char *argv[])
 {
-	Node n1(2), n2(5), n3(7);
-
-	n1.addLeft(n2);	
+	Node *n1 = new Node(2);
+	Node *n2 = new Node(5);
+	Node *n3 = new Node(7);
+	n1->addRight(n2);	 
+	n1->addLeft(n3);
+	n1->printNodes();	
+	
 	return 0;
 }
 
