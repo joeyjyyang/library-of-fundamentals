@@ -3,6 +3,15 @@
  * Memory: 9.3 MB - Beats 86.79% of submissions
  */
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
