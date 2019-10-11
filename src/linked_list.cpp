@@ -1,10 +1,7 @@
 /*
- *	File: linked_list.cpp
- *
  *	Author: Joey Yang
- *
- *	Description: linked list class file; contains function definitions.
- *	Implementation of a linked list.
+ *	Email: joeyyang.ai@gmail.com
+ *	Description: linked list source file; contains function definitions. 
  */
 
 #include <string>

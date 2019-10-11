@@ -1,5 +1,6 @@
 /*
  * Author: Joey Yang
+ * Email: joeyyang.ai@gmail.com
  * Runtime: 4 ms - Beats 58.25% of submissions
  * Memory: 8.8 MB - Beats 100.00% of submissions
  */

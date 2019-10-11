@@ -1,9 +1,7 @@
 /*
- *	File: linked_list.h
- *
- *	Description: linked list header file; contains function declarations.
- *
  *	Author: Joey Yang
+ *	Email: joeyyang.ai@gmail.com
+ *	Description: linked list header file; contains function declarations.
  */
 
 #ifndef LINKED_LIST_H
