@@ -11,25 +11,20 @@ int main(int argc, char *argv[])
 		data_structure::LinkedList<int> dummy_list1;
 	
 		dummy_list1.appendNode(3);
-		dummy_list1.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
 		dummy_list1.prependNode(1);
-		dummy_list1.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
 		dummy_list1.insertNode(2, 1);
 		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 
 		dummy_list1.insertNode(6, 2);
 		dummy_list1.appendNode(6);
+		dummy_list1.prependNode(6);
 		dummy_list1.printLinkedList();
 
 		dummy_list1.removeNode(6);
 		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
-
+		
 		dummy_list1.reverseLinkedList();
 		std::cout << "Reversing Linked List." << std::endl;
 		dummy_list1.printLinkedList();

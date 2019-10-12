@@ -204,48 +204,38 @@ void data_structure::LinkedList<T>::removeNode(const T &id)
 	}
 	else 
 	{
-		if (head_->id_ == id) 
+		int position = 0;
+		Node *current{head_};
+		Node *trail{nullptr};
+		while (current != nullptr)
 		{
-			std::cout << "Removing node {id: " << head_->id_ << "} from beginning of Linked List." << std::endl;
-			Node *current{head_};
-			head_ = head_->next_;
-			delete current;
-		}
-		else if (tail_->id_ == id) 
-		{
-			std::cout << "Removing node {id: " << tail_->id_ << "} from end of Linked List." << std::endl;
-			Node *current{head_};
-			while (current->next_ != tail_) 
+			if (current->id_ == id)
 			{
+				std::cout << "Removing node {id: " << current->id_ << "} at position: " << position << std::endl;
+				if (trail == nullptr)
+				{
+					std::cout << tail_->id_ << current->id_ << std::endl;
+					head_ = head_->next_;
+					delete current;
+					current = head_;
+				}
+				else
+				{
+					if (current == tail_)
+					{
+						tail_ = trail;
+					}
+					current = current->next_;
+					delete trail->next_;
+					trail->next_ = current;
+				}
+			}
+			else
+			{
+				trail = current;
 				current = current->next_;
 			}
-			tail_ = current;
-			tail_->next_ = nullptr;
-			current = current->next_;
-			delete current;
-		}
-		else 
-		{
-			Node *current{head_->next_};
-			Node *trail{head_};
-			while (current != nullptr) 
-			{
-				if (current->id_ == id) 
-				{
-					std::cout << "Removing node {id: " << current->id_ << "} from Linked List." << std::endl;
-					trail->next_ = current->next_;
-					current->next_ = nullptr;
-					delete current;
-					
-					return;
-				}
-				else 
-				{
-					trail = current;
-					current = current->next_;
-				}
-			}
-			std::cout << "Error: could not find node in Linked List." << std::endl;
+			position++;
 		}
 	}
 }
