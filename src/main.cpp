@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 		std::cout << "--------------" << std::endl;
 
 		dummy_list1.insertNode(6, 2);
+		dummy_list1.appendNode(6);
 		dummy_list1.printLinkedList();
 
 		dummy_list1.removeNode(6);
@@ -58,36 +59,17 @@ int main(int argc, char *argv[])
 		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 
-		data_structure::LinkedList<char> dummy_list3(dummy_list1);
+		data_structure::LinkedList<char> dummy_list3{dummy_list1}; //copy constructor
 		dummy_list3.removeNode('c');
 		dummy_list3.printLinkedList();
 		std::cout << "--------------" << std::endl;
 
 		data_structure::LinkedList<char> dummy_list2;
-		dummy_list2 = dummy_list3;
+		dummy_list2 = dummy_list3; //copy assignment operator
 		dummy_list2.reverseLinkedList();
 		std::cout << "Reversing Linked List." << std::endl;
 		dummy_list2.printLinkedList();
 		std::cout << "--------------" << std::endl;
-	}
-	std::cout << "------Test Case #3------" << std::endl;
-	{
-		data_structure::LinkedList<char> dummy_list1;
-
-		dummy_list1.appendNode('a');
-		dummy_list1.prependNode('f');
-		dummy_list1.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
-		data_structure::LinkedList<int> dummy_list2;
-	
-		dummy_list2.appendNode(13);
-		dummy_list2.insertNode(2, 0);
-		dummy_list2.printLinkedList();
-		std::cout << "--------------" << std::endl;
-
-		data_structure::LinkedList<int> dummy_list3(dummy_list2);
-		//dummy_list3 = dummy_list1;
 	}
 
 	return 0;
