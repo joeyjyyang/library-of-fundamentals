@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
 		
-		dummy_list1.reverseLinkedList();
+		dummy_list1.reverseLinkedListRecursive();
 		std::cout << "Reversing Linked List." << std::endl;
 		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 		dummy_list1.appendNode('d');
 		dummy_list1.prependNode('a');
 		dummy_list1.insertNode('b', 1);
-		dummy_list1.reverseLinkedList();
+		dummy_list1.reverseLinkedListRecursive();
 		std::cout << "Reversing Linked List." << std::endl;
 		dummy_list1.printLinkedList();
 		std::cout << "--------------" << std::endl;
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 
 		data_structure::LinkedList<char> dummy_list2;
 		dummy_list2 = dummy_list3; //copy assignment operator
-		dummy_list2.reverseLinkedList();
+		dummy_list2.reverseLinkedListRecursive();
 		std::cout << "Reversing Linked List." << std::endl;
 		dummy_list2.printLinkedList();
 		std::cout << "--------------" << std::endl;

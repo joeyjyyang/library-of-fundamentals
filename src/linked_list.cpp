@@ -261,40 +261,8 @@ void data_structure::LinkedList<T>::printLinkedList() const
 	}
 }
 
-/*
 template <class T>
-void data_structure::LinkedList<T>::loadNodes(std::ifstream &infile) 
-{
-	if (!infile.is_open()) 
-	{
-		std::cout << "Error: failed to open csv file containing nodes to load." << std::endl;
-	}
-	else 
-	{
-		std::string line;
-		std::string field_id;
-		while (std::getline(infile, field_id, ',')) 
-		{
-			try 
-			{
-				appendNode(atoi(field_id.c_str()));
-			}
-			catch (const std::invalid_argument &ex) 
-			{
-				std::cout << "Error: the ID is invalid and could not be converted into a number." << std::endl;
-			}
-			catch (const std::out_of_range &ex) 
-			{
-				std::cout << "Error: the ID is out of range." << std::endl;
-			}
-		}
-	}
-}
-*/
-
-//recursively reverse the Linked List
-template <class T>
-void data_structure::LinkedList<T>::reverseLinkedList() 
+void data_structure::LinkedList<T>::reverseLinkedListRecursive() 
 {
 	if (head_ == tail_) 
 	{
@@ -302,7 +270,7 @@ void data_structure::LinkedList<T>::reverseLinkedList()
 	}
 	Node *current{head_};
 	head_ = current->next_;
-	reverseLinkedList();
+	reverseLinkedListRecursive();
 	tail_->next_ = current;
 	current->next_ = nullptr;
 	tail_ = current;
