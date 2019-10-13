@@ -214,7 +214,6 @@ void data_structure::LinkedList<T>::removeNode(const T &id)
 				std::cout << "Removing node {id: " << current->id_ << "} at position: " << position << std::endl;
 				if (trail == nullptr)
 				{
-					std::cout << tail_->id_ << current->id_ << std::endl;
 					head_ = head_->next_;
 					delete current;
 					current = head_;
@@ -274,6 +273,22 @@ void data_structure::LinkedList<T>::reverseLinkedListRecursive()
 	tail_->next_ = current;
 	current->next_ = nullptr;
 	tail_ = current;
+}
+
+template <class T>
+void data_structure::LinkedList<T>::reverseLinkedListIterative() 
+{
+	Node *current{head_};
+	Node *trail{nullptr};
+	tail_ = head_;
+	while (current != nullptr)
+	{
+		current = head_->next_;
+		head_->next_ = trail;
+		trail = head_;
+		head_ = current;
+	}
+	head_ = trail;
 }
 
 /*
