@@ -56,8 +56,8 @@ public:
 	void removeNode(const T &id);
 	void printLinkedList() const;
 	//void loadNodes(std::ifstream &nodes_infile);
-	//recursively reverse the Linked List
-	void reverseLinkedList();
+	void reverseLinkedListRecursive();
+	void reverseLinkedListIterative();
 	//void mergeSortLinkedList();
 
 private:
