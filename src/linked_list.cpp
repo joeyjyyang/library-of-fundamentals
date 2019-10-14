@@ -11,7 +11,8 @@
 
 //ctor
 template <class T>
-data_structure::LinkedList<T>::LinkedList()
+data_structure::LinkedList<T>::LinkedList() :
+	head_{nullptr}
 {
 	std::cout << "Linked List object instantiated." << std::endl;
 }
@@ -21,8 +22,7 @@ data_structure::LinkedList<T>::LinkedList()
 //copy ctor
 template <class T>
 data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T> &other) :
-	head_{nullptr},
-	tail_{nullptr}
+	head_{nullptr}
 {
 	Node *current{other.head_};
 	while (current != nullptr)
@@ -63,7 +63,6 @@ template <class U>
 void swapContents(data_structure::LinkedList<U> &linked_list1, data_structure::LinkedList<U> &linked_list2)
 {
 	std::swap(linked_list1.head_, linked_list2.head_);
-	std::swap(linked_list1.tail_, linked_list2.tail_);
 }
 
 //class methods 
@@ -104,12 +103,6 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 		
 		return head_->id_;
 	}
-	else if (position == getSize() - 1) 
-	{
-		std::cout << "Node {id: " << tail_->id_ << "} is located at position " << position << std::endl;
-		
-		return tail_->id_;
-	}
 	else if (position > getSize() - 1 || position < 0) 
 	{
 		std::cout << "Error: the node position is invalid." << std::endl;
@@ -133,37 +126,38 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 template <class T>
 void data_structure::LinkedList<T>::appendNode(const T &id) 
 {
-	Node *current = new Node{id};
+	Node *temp = new Node{id};
 	if (isEmpty()) 
 	{
-		std::cout << "Adding first node {id: " << current->id_ << "} to empty Linked List." << std::endl;
-		head_ = current;
-		tail_ = current;
+		std::cout << "Adding first node {id: " << temp->id_ << "} to empty Linked List." << std::endl;
+		head_ = temp;
 	}
 	else 
 	{
-		std::cout << "Adding new node {id: " << current->id_ << "} to end of Linked List." << std::endl;
-		tail_->next_ = current;
-		tail_ = tail_->next_;
+		Node *current{head_};
+		while (current->next_ != nullptr)
+		{
+			current = current->next_;
+		}
+		std::cout << "Adding new node {id: " << temp->id_ << "} to end of Linked List." << std::endl;
+		current->next_ = temp;
 	}
 }
 
 template <class T>
 void data_structure::LinkedList<T>::prependNode(const T &id) 
 {
-	Node *current = new Node{id};
+	Node *temp = new Node{id};
 	if (isEmpty()) 
 	{	
-		std::cout << "Adding first node to empty Linked List: " << "id: " << current->id_ << std::endl;
-		head_ = current;
-		tail_ = current;
+		std::cout << "Adding first node to empty Linked List: " << "id: " << temp->id_ << std::endl;
 	}
 	else 
 	{
-		std::cout << "Adding new node {id: " << current->id_ << "} to beginning of Linked List." << std::endl;
-		current->next_ = head_;
-		head_ = current;
+		std::cout << "Adding new node {id: " << temp->id_ << "} to beginning of Linked List." << std::endl;
+		temp->next_ = head_;
 	}
+	head_ = temp;
 }
 
 template <class T>
@@ -183,15 +177,15 @@ void data_structure::LinkedList<T>::insertNode(const T &id, const int position)
 	}
 	else 
 	{
-		Node *current = new Node{id};
+		Node *temp = new Node{id};
 		Node *trail{head_};
 		for (int current_position = 0; current_position < position - 1; current_position++) 
 		{
 			trail = trail->next_;
 		}
-		std::cout << "Inserting new node {id: " << current->id_ << "} to Linked List at position " << position << std::endl;
-		current->next_ = trail->next_;
-		trail->next_ = current;
+		std::cout << "Inserting new node {id: " << temp->id_ << "} to Linked List at position " << position << std::endl;
+		temp->next_ = trail->next_;
+		trail->next_ = temp;
 	}
 }
 
@@ -220,10 +214,6 @@ void data_structure::LinkedList<T>::removeNode(const T &id)
 				}
 				else
 				{
-					if (current == tail_)
-					{
-						tail_ = trail;
-					}
 					current = current->next_;
 					delete trail->next_;
 					trail->next_ = current;
@@ -262,17 +252,16 @@ void data_structure::LinkedList<T>::printLinkedList() const
 
 template <class T>
 void data_structure::LinkedList<T>::reverseLinkedListRecursive() 
-{
-	if (head_ == tail_) 
+{	
+	if (head_->next_ == nullptr) 
 	{
 		return;
 	}
 	Node *current{head_};
 	head_ = current->next_;
 	reverseLinkedListRecursive();
-	tail_->next_ = current;
+	current->next_->next_ = current;
 	current->next_ = nullptr;
-	tail_ = current;
 }
 
 template <class T>
@@ -280,7 +269,6 @@ void data_structure::LinkedList<T>::reverseLinkedListIterative()
 {
 	Node *current{head_};
 	Node *trail{nullptr};
-	tail_ = head_;
 	while (current != nullptr)
 	{
 		current = head_->next_;

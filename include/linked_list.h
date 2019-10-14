@@ -46,7 +46,6 @@ public:
 	friend void ::swapContents(LinkedList<U> &linked_list1, LinkedList<U> &linked_list2);
 	
 	//class methods
-	
 	bool isEmpty() const;
 	int getSize() const;
 	T getNodeID(const int position) const;
@@ -55,7 +54,6 @@ public:
 	void insertNode(const T &id, const int position);
 	void removeNode(const T &id);
 	void printLinkedList() const;
-	//void loadNodes(std::ifstream &nodes_infile);
 	void reverseLinkedListRecursive();
 	void reverseLinkedListIterative();
 	//void mergeSortLinkedList();
@@ -64,16 +62,16 @@ private:
 	struct Node
 	{
 		const T id_;
-		Node *next_{nullptr};
+		Node *next_;
 
 		Node(const T id) : 
-			id_{id} 
+			id_{id},
+			next_{nullptr}
 		{
 		}
 	};
 
-	Node *head_{nullptr};
-	Node *tail_{nullptr};
+	Node *head_;
 };
 }
 

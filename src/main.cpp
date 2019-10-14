@@ -6,6 +6,27 @@
  
 int main(int argc, char *argv[])
 {
+	std::cout << "------Test Case #0------" << std::endl;
+	{
+		data_structure::LinkedList<int> dummy_list1;
+		
+		dummy_list1.appendNode(3);
+		dummy_list1.prependNode(1);
+		dummy_list1.insertNode(2, 1);
+		dummy_list1.printLinkedList();
+		std::cout << "--------------" << std::endl;
+		
+		dummy_list1.reverseLinkedListIterative();
+		std::cout << "Reversing Linked List iteratively." << std::endl;
+		dummy_list1.printLinkedList();
+		std::cout << "--------------" << std::endl;
+		
+		dummy_list1.reverseLinkedListRecursive();
+		std::cout << "Reversing Linked List recursively." << std::endl;
+		dummy_list1.printLinkedList();
+		std::cout << "--------------" << std::endl;
+	}
+
 	std::cout << "------Test Case #1------" << std::endl;
 	{
 		data_structure::LinkedList<int> dummy_list1;
