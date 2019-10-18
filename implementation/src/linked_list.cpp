@@ -112,7 +112,7 @@ T data_structure::LinkedList<T>::getNodeID(const int position) const
 	else 
 	{
 		Node* current{head_};
-		for (int current_position = 0; current_position < position; current_position++) 
+		for (int current_position = 0; current_position < position; ++current_position) 
 		{
 			current = current->next_;
 		}
@@ -179,7 +179,7 @@ void data_structure::LinkedList<T>::insertNode(const T &id, const int position)
 	{
 		Node *temp = new Node{id};
 		Node *trail{head_};
-		for (int current_position = 0; current_position < position - 1; current_position++) 
+		for (int current_position = 0; current_position < position - 1; ++current_position) 
 		{
 			trail = trail->next_;
 		}
