@@ -26,19 +26,16 @@
 - Greedy Algorithms
 ## C++ STL Containers
 - Sequence Containers
-	- std::array
-	- std::vector
-	- std::deque
-	- std::list
+	- 'std::array'
+	- 'std::vector'
+	- 'std::deque'
+	- 'std::list'
 - Container Adaptors
-	- std::stack
-	- std::queue
-	- std::priority_queue
+	- 'std::stack'
+	- 'std::queue'
+	- 'std::priority_queue'
 - (Ordered and Unordered) Associative Containers
-	- std::set
-	- std::unordered_set
-	- std::map
-	- std::unordered_map
-
-
--
+	- 'std::set'
+	- 'std::unordered_set'
+	- 'std::map'
+	- 'std::unordered_map'
