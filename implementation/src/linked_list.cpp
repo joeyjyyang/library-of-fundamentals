@@ -4,6 +4,10 @@
  *	Description: linked list source file; contains function definitions. 
  */
 
+/*	
+ * Compile Command: g++ -std=c++11 -I ../include -o main main.cpp linked_list.cpp
+ */
+ 
 #include <string>
 #include <algorithm>
 
@@ -296,3 +300,102 @@ template void swapContents(data_structure::LinkedList<char> &linked_list1, data_
 template void swapContents(data_structure::LinkedList<int> &linked_list1, data_structure::LinkedList<int> &linked_list2);
 template void swapContents(data_structure::LinkedList<double> &linked_list1, data_structure::LinkedList<double> &linked_list2);
 template void swapContents(data_structure::LinkedList<std::string> &linked_list1, data_structure::LinkedList<std::string> &linked_list2);
+
+int main(int argc, char *argv[])
+{
+	std::cout << "------Test Case #0------" << std::endl;
+	{
+		data_structure::LinkedList<int> *dummy_list1 = new data_structure::LinkedList<int>();
+		
+		dummy_list1->appendNode(3);
+		dummy_list1->prependNode(1);
+		dummy_list1->insertNode(2, 1);
+		dummy_list1->printLinkedList();
+		std::cout << "--------------" << std::endl;
+		
+		dummy_list1->reverseLinkedListIterative();
+		std::cout << "Reversing Linked List iteratively." << std::endl;
+		dummy_list1->printLinkedList();
+		std::cout << "--------------" << std::endl;
+		
+		dummy_list1->reverseLinkedListRecursive();
+		std::cout << "Reversing Linked List recursively." << std::endl;
+		dummy_list1->printLinkedList();
+		std::cout << "--------------" << std::endl;
+		
+		delete dummy_list1;
+	}
+
+	std::cout << "------Test Case #1------" << std::endl;
+	{
+		data_structure::LinkedList<int> *dummy_list1 = new data_structure::LinkedList<int>();
+	
+		dummy_list1->appendNode(3);
+		dummy_list1->prependNode(1);
+		dummy_list1->insertNode(2, 1);
+		dummy_list1->printLinkedList();
+		std::cout << "--------------" << std::endl;
+
+		dummy_list1->insertNode(6, 2);
+		dummy_list1->appendNode(6);
+		dummy_list1->prependNode(6);
+		dummy_list1->printLinkedList();
+
+		dummy_list1->removeNode(6);
+		dummy_list1->printLinkedList();
+		std::cout << "--------------" << std::endl;
+		
+		dummy_list1->reverseLinkedListRecursive();
+		std::cout << "Reversing Linked List recursively." << std::endl;
+		dummy_list1->printLinkedList();
+		std::cout << "--------------" << std::endl;
+		
+		dummy_list1->appendNode(2);
+		dummy_list1->prependNode(1);
+		dummy_list1->insertNode(3, 0);
+		std::cout << "--------------" << std::endl;
+
+		dummy_list1->getNodeID(0);
+		dummy_list1->getNodeID(1);
+		dummy_list1->getNodeID(2);
+		dummy_list1->getNodeID(3);
+		std::cout << "--------------" << std::endl;
+		
+		delete dummy_list1;
+	}
+
+	std::cout << "------Test Case #2------" << std::endl;
+	{
+		data_structure::LinkedList<char> *dummy_list1 = new data_structure::LinkedList<char>();
+		
+		dummy_list1->appendNode('c');
+		dummy_list1->appendNode('d');
+		dummy_list1->prependNode('a');
+		dummy_list1->insertNode('b', 1);
+		dummy_list1->reverseLinkedListRecursive();
+		std::cout << "Reversing Linked List recursively." << std::endl;
+		dummy_list1->printLinkedList();
+		dummy_list1->reverseLinkedListIterative();
+		std::cout << "Reversing Linked List iteratively." << std::endl;
+		dummy_list1->printLinkedList();
+		std::cout << "--------------" << std::endl;
+
+		data_structure::LinkedList<char> *dummy_list3 = new data_structure::LinkedList<char>(*dummy_list1); //copy constructor
+		dummy_list3->removeNode('c');
+		dummy_list3->printLinkedList();
+		std::cout << "--------------" << std::endl;
+
+		data_structure::LinkedList<char> *dummy_list2 = new data_structure::LinkedList<char>();
+		dummy_list2 = dummy_list3; //copy assignment operator
+		dummy_list2->reverseLinkedListRecursive();
+		std::cout << "Reversing Linked List recursively." << std::endl;
+		dummy_list2->printLinkedList();
+		std::cout << "--------------" << std::endl;
+
+		delete dummy_list1;
+		delete dummy_list2;
+		delete dummy_list3;
+	}
+
+	return 0;
+}
