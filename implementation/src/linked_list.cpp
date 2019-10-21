@@ -4,10 +4,6 @@
  *	Description: linked list source file; contains function definitions. 
  */
 
-/*	
- * Compile Command: g++ -std=c++11 -I ../include -o main main.cpp linked_list.cpp
- */
- 
 #include <string>
 #include <algorithm>
 
