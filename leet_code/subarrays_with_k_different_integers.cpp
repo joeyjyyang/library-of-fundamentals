@@ -9,7 +9,7 @@ public:
     int subarraysWithKDistinct(vector<int>& A, int K) {
         int unique = 0;
         std::set<int> set;
-        for (std::vector<int>::iterator it1 = A.begin(); it1 != A.end(); ++it1)
+        for (std::vector<int>::iterator it1 = A.begin(); it1 != A.end() - K + 1; ++it1) //stop at end() - K + 1 element
         {
             for (std::vector<int>::iterator it2 = it1; it2 != A.end(); ++it2)
             {
