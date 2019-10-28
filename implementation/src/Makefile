@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++11
 HEADER_DIR = ../include/
 
-all: linked_list binary_tree 
+all: linked_list binary_tree graph sliding_window 
 
 linked_list: linked_list.o 
 	$(CXX) $(CXXFLAGS) -o linked_list linked_list.o
@@ -15,3 +15,15 @@ binary_tree: binary_tree.o
 
 binary_tree.o: binary_tree.cpp
 	$(CXX) $(CXXFLAGS) -c binary_tree.cpp
+
+graph: graph.o
+	$(CXX) $(CXXFLAGS) -o graph graph.o
+
+graph.o: graph.cpp
+	$(CXX) $(CXXFLAGS) -c graph.cpp
+
+sliding_window: sliding_window.o
+	$(CXX) $(CXXFLAGS) -o sliding_window sliding_window.o
+
+sliding_window.o: sliding_window.cpp
+	$(CXX) $(CXXFLAGS) -c sliding_window.cpp
