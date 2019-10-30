@@ -1,4 +1,11 @@
-#include <iostream>
+#/* 
+ * Author: Joey Yang
+ * Email: joeyyang.ai@gmail.com
+ * Runtime: 8 ms - Beats 99.31% of submissions
+ * Memory: 11.3 MB - Beats 42.86% of submissions
+ */
+
+include <iostream>
 #include <vector>
 #include <string>
 
