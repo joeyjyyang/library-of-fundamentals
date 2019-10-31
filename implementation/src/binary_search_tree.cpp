@@ -19,7 +19,6 @@ private:
 Node::Node(const int value) :
 	value_(value), right_child_(nullptr), left_child_(nullptr)
 {
-	std::cout << "Node created." << std::endl;
 }
 
 Node::~Node()
@@ -31,11 +30,16 @@ Node::~Node()
 void Node::insertNode(const int value)
 {
 	Node *node = new Node(value);
+	if (right_child_ == nullptr && left_child_ == nullptr)
+	{
+		;
+	}
+	/*Node *node = new Node(value);
 	if (node->value_ <= value_) left_child_ = node;
-	else right_child_ = node;
+	else right_child_ = node;*/
 }
 
-void Node::print() const
+void Node::print() const 
 {
 	std::cout << left_child_->value_ << std::endl;
 	std::cout << value_ << std::endl;
@@ -49,6 +53,7 @@ int main(int argc, char *argv[])
 	root->insertNode(15);
 	root->insertNode(7);
 	root->print();
+
 
 	return 0;
 }
