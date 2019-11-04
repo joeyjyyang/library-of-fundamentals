@@ -48,6 +48,7 @@
 - Storing and accessing sequential data, temporarily storing objects, used as buffers for I/O routines, lookup tables and inverse lookup tables, hack to return multiple values from a function (via pointer), memoization (caching) results in dynamic programming problems.
 
 #### Time Complexities
+
 |               | **Static Array** | **Dynamic Array** |
 | **Access**    | O(1)             | O(1)              |
 | **Search**    | O(N)             | O(N)              |
