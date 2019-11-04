@@ -9,9 +9,9 @@
 
 #include "linked_list.h"
 
+//ctor
 template <class T>
-data_structure::LinkedList<T>::LinkedList() :
-	head_{nullptr}
+LinkedList<T>::LinkedList() : head_{nullptr}
 {
 	std::cout << "Linked List object instantiated." << std::endl;
 }
@@ -19,8 +19,7 @@ data_structure::LinkedList<T>::LinkedList() :
 /*rule of 3*/
 //copy ctor
 template <class T>
-data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T>& other) :
-	head_{nullptr}
+LinkedList<T>::LinkedList(const LinkedList<T>& other) : head_{nullptr}
 {
 	Node* current{other.head_};
 	while (current != nullptr)
@@ -34,7 +33,7 @@ data_structure::LinkedList<T>::LinkedList(const data_structure::LinkedList<T>& o
 //copy assignment operator
 //implicitly calls the copy ctor (pass by value) and uses the copy-and-swap idiom
 template <class T>
-data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(data_structure::LinkedList<T> other) 
+LinkedList<T>& LinkedList<T>::operator=(LinkedList<T> other) 
 {
 	std::cout << "Linked List object copy assignment operator called." << std::endl;
 	swapContents(*this, other); 
@@ -43,7 +42,7 @@ data_structure::LinkedList<T>& data_structure::LinkedList<T>::operator=(data_str
 
 //dtor
 template <class T>
-data_structure::LinkedList<T>::~LinkedList() 
+LinkedList<T>::~LinkedList() 
 {
 	Node* current{head_};
 	while (current != nullptr) 
@@ -57,20 +56,20 @@ data_structure::LinkedList<T>::~LinkedList()
 
 //friend swap function
 template <class U>
-void swapContents(data_structure::LinkedList<U>& linked_list1, data_structure::LinkedList<U>& linked_list2)
+void swapContents(LinkedList<U>& linked_list1, LinkedList<U>& linked_list2)
 {
 	std::swap(linked_list1.head_, linked_list2.head_);
 }
 
 /*class methods*/
 template <class T>
-bool data_structure::LinkedList<T>::isEmpty() const 
+bool LinkedList<T>::isEmpty() const 
 {
 	return head_ == nullptr;
 }
 
 template <class T>
-bool data_structure::LinkedList<T>::findNode(const T& id) const 
+bool LinkedList<T>::findNode(NodeId id) const 
 {
 	Node* current{head_};
 	while (current != nullptr)
@@ -82,7 +81,7 @@ bool data_structure::LinkedList<T>::findNode(const T& id) const
 }
 
 template <class T>
-void data_structure::LinkedList<T>::appendNode(const T& id) 
+void LinkedList<T>::appendNode(NodeId id) 
 {
 	if (findNode(id)) std::cout << "Error: new node must have unique id. Could not add new node as this id already exists." << std::endl;
 	else
@@ -103,7 +102,7 @@ void data_structure::LinkedList<T>::appendNode(const T& id)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::prependNode(const T& id) 
+void LinkedList<T>::prependNode(NodeId id) 
 {
 	if (findNode(id)) std::cout << "Error: new node must have unique id. Could not add new node as this id already exists." << std::endl;
 	else
@@ -119,7 +118,7 @@ void data_structure::LinkedList<T>::prependNode(const T& id)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::removeNode(const T& id) 
+void LinkedList<T>::removeNode(NodeId id) 
 {
 	if (isEmpty()) std::cout << "Error: the Linked List is empty." << std::endl;
 	else if (!findNode(id)) std::cout << "Error: the specified does not exist in the Linked List." << std::endl;
@@ -155,7 +154,7 @@ void data_structure::LinkedList<T>::removeNode(const T& id)
 }
 
 template <class T>
-void data_structure::LinkedList<T>::printLinkedList() const 
+void LinkedList<T>::printLinkedList() const 
 {
 	if (isEmpty()) std::cout << "Error: the Linked List is empty." << std::endl;
 	else 
@@ -173,7 +172,7 @@ void data_structure::LinkedList<T>::printLinkedList() const
 }
 
 template <class T>
-void data_structure::LinkedList<T>::reverseLinkedListRecursive() 
+void LinkedList<T>::reverseLinkedListRecursive() 
 {	
 	if (head_->next_ == nullptr) return;
 	Node* current{head_};
@@ -184,7 +183,7 @@ void data_structure::LinkedList<T>::reverseLinkedListRecursive()
 }
 
 template <class T>
-void data_structure::LinkedList<T>::reverseLinkedListIterative() 
+void LinkedList<T>::reverseLinkedListIterative() 
 {
 	Node* current{head_};
 	Node* trail{nullptr};
@@ -200,27 +199,27 @@ void data_structure::LinkedList<T>::reverseLinkedListIterative()
 
 /*
 template <class T>
-void data_structure::LinkedList<T>::mergeSortLinkedList()
+void LinkedList<T>::mergeSortLinkedList()
 {
 }
 */
 
 //explicit instantiation of template into current compilation unit
-template class data_structure::LinkedList<char>;
-template class data_structure::LinkedList<int>;
-template class data_structure::LinkedList<double>;
-template class data_structure::LinkedList<std::string>;
+template class LinkedList<char>;
+template class LinkedList<int>;
+template class LinkedList<double>;
+template class LinkedList<std::string>;
 
-template void swapContents(data_structure::LinkedList<char>& linked_list1, data_structure::LinkedList<char>& linked_list2);
-template void swapContents(data_structure::LinkedList<int>& linked_list1, data_structure::LinkedList<int>& linked_list2);
-template void swapContents(data_structure::LinkedList<double>& linked_list1, data_structure::LinkedList<double>& linked_list2);
-template void swapContents(data_structure::LinkedList<std::string>& linked_list1, data_structure::LinkedList<std::string>& linked_list2);
+template void swapContents(LinkedList<char>& linked_list1, LinkedList<char>& linked_list2);
+template void swapContents(LinkedList<int>& linked_list1, LinkedList<int>& linked_list2);
+template void swapContents(LinkedList<double>& linked_list1, LinkedList<double>& linked_list2);
+template void swapContents(LinkedList<std::string>& linked_list1, LinkedList<std::string>& linked_list2);
 
 int main(int argc, char* argv[])
 {
 	std::cout << "---- Test Case #1: Printing, Adding, and Removing ----" << std::endl;
 	{
-		data_structure::LinkedList<int>* dummy_list1 = new data_structure::LinkedList<int>();
+		LinkedList<int>* dummy_list1 = new LinkedList<int>();
 		dummy_list1->appendNode(3);
 		dummy_list1->prependNode(2);
 		dummy_list1->appendNode(4);
@@ -238,7 +237,7 @@ int main(int argc, char* argv[])
 	}
 	std::cout << "---- Test Case #2: Reversing (Recursively and Iteratively) ----" << std::endl;
 	{
-		data_structure::LinkedList<int>* dummy_list1 = new data_structure::LinkedList<int>();
+		LinkedList<int>* dummy_list1 = new LinkedList<int>();
 		dummy_list1->appendNode(4);
 		dummy_list1->appendNode(3);
 		dummy_list1->appendNode(2);
@@ -260,7 +259,7 @@ int main(int argc, char* argv[])
 	}
 	std::cout << "---- Test Case #3: Rule of 3 ----" << std::endl;
 	{
-		data_structure::LinkedList<char>* dummy_list1 = new data_structure::LinkedList<char>();
+		LinkedList<char>* dummy_list1 = new LinkedList<char>();
 		dummy_list1->appendNode('a');
 		dummy_list1->appendNode('b');
 		dummy_list1->appendNode('c');
@@ -268,11 +267,11 @@ int main(int argc, char* argv[])
 		dummy_list1->printLinkedList();
 		std::cout << "--------------" << std::endl;
 
-		data_structure::LinkedList<char>* dummy_list3 = new data_structure::LinkedList<char>(*dummy_list1); //copy constructor
+		LinkedList<char>* dummy_list3 = new LinkedList<char>(*dummy_list1); //copy constructor
 		dummy_list3->printLinkedList();
 		std::cout << "--------------" << std::endl;
 
-		data_structure::LinkedList<char>* dummy_list2 = new data_structure::LinkedList<char>();
+		LinkedList<char>* dummy_list2 = new LinkedList<char>();
 		dummy_list2 = dummy_list3; //copy assignment operator
 		dummy_list2->printLinkedList();
 		std::cout << "--------------" << std::endl;

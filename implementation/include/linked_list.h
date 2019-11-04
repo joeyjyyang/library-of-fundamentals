@@ -14,21 +14,20 @@
 #include <cstdlib>
 
 //forward declaration 
-namespace data_structure
-{
-	template <class T>
-	class LinkedList;
-}
+template <class T>
+class LinkedList;
 
 template <class U>
-void swapContents(data_structure::LinkedList<U>& linked_list1, data_structure::LinkedList<U>& linked_list2);
+void swapContents(LinkedList<U>& linked_list1, LinkedList<U>& linked_list2);
 
-namespace data_structure
-{
 template <class T>
 class LinkedList 
 {
 public:
+	//type alias for consistency
+	using NodeId = const T;
+
+	//ctor
 	LinkedList();
 
 	/*rule of 3*/
@@ -38,16 +37,17 @@ public:
 	LinkedList<T>& operator=(LinkedList<T> other);
 	//dtor
 	~LinkedList();
+
 	//friend swap function
 	template <class U>
 	friend void ::swapContents(LinkedList<U>& linked_list1, LinkedList<U>& linked_list2);
 
 	/*class methods*/
 	bool isEmpty() const;
-	bool findNode(const T& id) const;
-	void appendNode(const T& id);
-	void prependNode(const T& id);
-	void removeNode(const T& id);
+	bool findNode(NodeId id) const;
+	void appendNode(NodeId id);
+	void prependNode(NodeId id);
+	void removeNode(NodeId id);
 	void printLinkedList() const;
 	void reverseLinkedListRecursive();
 	void reverseLinkedListIterative();
@@ -56,16 +56,11 @@ public:
 private:
 	struct Node
 	{
-		const T id_;
+		NodeId id_;
 		Node* next_;
-		Node(const T& id) : 
-			id_{id},
-			next_{nullptr}
-		{
-		}
+		Node(NodeId id) : id_{id}, next_{nullptr} {}
 	};
 	Node* head_;
 };
-}
 
 #endif // LINKED_LIST_H
