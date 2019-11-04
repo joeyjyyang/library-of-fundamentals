@@ -17,7 +17,9 @@ private:
 };
 
 Node::Node(const int value) :
-	value_(value), right_child_(nullptr), left_child_(nullptr)
+	value_(value), 
+	right_child_(nullptr), 
+	left_child_(nullptr)
 {
 }
 
