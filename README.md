@@ -39,7 +39,22 @@
 	- Finding all permutations of a string.
 
 ## Data Structures
-- Arrays
+
+### Arrays (Static and Dynamic)
+
+#### Static Arrays
+- Fixed length container containing n indexable elements.
+- Given as contiguous chunks of memory; memory addresses of elements are adjacent.
+- Storing and accessing sequential data, temporarily storing objects, used as buffers for I/O routines, lookup tables and inverse lookup tables, hack to return multiple values from a function (via pointer), memoization (caching) results in dynamic programming problems.
+
+#### Time Complexities
+|               | **Static Array** | **Dynamic Array** |
+| **Access**    | O(1)             | O(1)              |
+| **Search**    | O(N)             | O(N)              |
+| **Insertion** | N/A              | O(n)              |
+| **Appending** | N/A              | O(1)              |
+| **Deletion**  | N/A              | O(N)              |
+
 - Linked Lists
 - Stacks
 - Queues
