@@ -121,12 +121,13 @@ Implementations of essential data structures and algorithms.
 - Depth First Search (DFS) traversal on a Graph in Graph Theory.
 
 #### Stack (Worst Case) Time Complexities
-| --------- | ---- | 
-| Pushing   | O(1) |       
-| Popping   | O(1) |      
-| Peeking   | O(1) |         
-| Searching | O(n) |    
-| Size      | O(1) |         
+|           | Stacks |
+| --------- | ------ | 
+| Pushing   | O(1)   |       
+| Popping   | O(1)   |      
+| Peeking   | O(1)   |         
+| Searching | O(n)   |    
+| Size      | O(1)   |         
 
 ### Queues
 - A linear data structure which models real world queues by having two primary operations, namely enqueue (adding element to end) and dequeue (removing element from front).
@@ -141,13 +142,14 @@ Implementations of essential data structures and algorithms.
 - Breadth First Search (BFS) traversal on a Graph in Graph Theory.
 
 #### Queue (Worst Case) Time Complexities
-| -------- | ---- | 
-| Enqueue  | O(1) |       
-| Dequeue  | O(1) |      
-| Peeking  | O(1) |         
-| Contains | O(n) |    
-| Removal  | O(n) | 
-| Is Empty | O(1) | 
+| -------- | Queues | 
+| -------- | ------ | 
+| Enqueue  | O(1)   |       
+| Dequeue  | O(1)   |      
+| Peeking  | O(1)   |         
+| Contains | O(n)   |    
+| Removal  | O(n)   | 
+| Is Empty | O(1)   | 
 
 ### Priority Queues
 
