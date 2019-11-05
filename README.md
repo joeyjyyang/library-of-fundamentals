@@ -142,7 +142,7 @@ Implementations of essential data structures and algorithms.
 - Breadth First Search (BFS) traversal on a Graph in Graph Theory.
 
 #### Queue (Worst Case) Time Complexities
-| -------- | Queues | 
+|          | Queues | 
 | -------- | ------ | 
 | Enqueue  | O(1)   |       
 | Dequeue  | O(1)   |      
@@ -152,10 +152,97 @@ Implementations of essential data structures and algorithms.
 | Is Empty | O(1)   | 
 
 ### Priority Queues
+- An abstract data type that operates similar to a normal queue except that each element has a certain priority. 
+	- The priority of the elements determine the order in which elements are removed.
+- Only supports comparable data, meaning data inserted must be able to be ordered in some way either from least to greatest or greatest to least.
+	- Ensures the possibility of assigning relative priorities to each element.
+- Typically implemented using Heaps (Min or Max), since Heaps provide the best possible time complexity for operations.
+	- For simplicity, the Binary Heap is commonly used.
+- **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/priorityqueue/BinaryHeap.java
 
-#### Min Heap
+#### Heaps
+- A Tree based data structure that satisfies the heap invariant that if A is a parent node of B, then A is ordered with respect to B for all nodes A, B in the heap.
+	- i.e. the parent node is always less than or equal to, or greater than or equal to, its child nodes for all nodes.
+- Form the canonical underlying data structure for Priority Queues.
+	- Important not to be confused with Priority Queues, since Priority Queues are abstract data types and can be implemented using other methods (i.e. unsorted lists).
+- Heaps must be Trees; therefore, Heaps cannot contain cycles.
+- If all elements are known (i.e. stored in Binary Tree or Array), a Priority Queue can be created in linear O(n) time using the Heapify operation.
 
-#### Max Heap
+#### Binary Heaps
+- A Binary Tree that supports the heap invariant.
+- Each node has exactly two children (including leaf nodes which have null referenced children).
+- Canonical method of representing Binary Heaps is to use Arrays.
+	- Elegent and fast, as new elements/nodes are appended to the last index of the array.
+	- Root node is stored at the first index.
+	- Traversal of array and Binary Heap goes from left to right. 
+	- Provides easy access to nodes (i.e. zero based indexing).
+		- i is the parent node index in the array.
+		- 2i + 1 is the left child index.
+		- 2i + 2 is the right child index.
+
+#### Inserting Elements into Binary Heaps
+- The structure of a Binary Heap used for a Priority Queue should always be in the form of a Complete Binary Tree to maintain an insertion point.
+	- Every level, except possibly the last level, is filled and all nodes are as far left as possible. 
+	- Nodes are inserted at the bottom level as far left as possible to maintain this property.
+	- The inserted node is bubbled up (swimming) until it no longer violates the heap invariant and is in the correct position.
+
+#### Removing Elements from Binary Heaps
+
+##### Removing the Root Node (Polling)
+- Generally want to always remove the root node (polling), which has the highest priority.
+	- Do not need to search, as the root node has index 0 in the array.
+- Before removing root node, it is swapped with the last node of the Binary Heap (in the last index of the array).
+- After the root node is removed, the swapped node is bubbled down (sinking) to satisfy the heap invariant.
+	- Remember to swap with left child node when bubbling down if two child nodes have the same value.
+
+##### Removing Elements in O(n)
+- When removing nodes which are not the root node, the swap (with last node), remove, then bubble idiom is still used; however, could either bubble up (swim) or bubble down (swim).
+- Inefficiency from performing a linear search of the index of the node to be removed before swapping. 
+
+##### Removing Elements in O(log(n))
+- Leverages a Hashtable for easy lookup of where the node to be removed is indexed at in the array.
+	- Hashtables provide constant time O(1) lookup and update for a mapping from a key (node value) to a value (node index).
+- To deal with multiple nodes having the same value, instead of mapping one value to one position, map one value to multiple positions (at each index where duplicate exists).
+	- Using a Set or Tree Set of indexes (value) for which a particular node value (key) maps to.
+	- Swapping (and removal) occurs in Tree (for nodes) but also in the Hashtable (for indexes).
+	- Note that it does not matter which duplicate node is removed, as long as the heap invariant is satisfied in the end. 
+
+#### Priority Queue Usages
+- Graph Theory algorithms.
+- Certain implementations of Dijkstra's Shortest Path algorithm to fetch the next nodes to explore.
+- Anytime the "next best" or "next worst" element needs to be dynamically fetched.
+- Huffman coding (lossless data compression).
+- Best First Search (BFS) algorithms such as A* (A star) to continuously grab the next most promising node in a Graph during traversal.
+- Used by Minimum Spanning Tree (MST) algorithms on Directed Graphs.
+
+#### Priority Queue (Worst Case) Time Complexities
+|                          | Priority Queues |
+| ------------------------ | --------------- | 
+| Polling                  | O(log(n))       |       
+| Peeking                  | O(1)            |      
+| Adding                   | O(log(n))       |         
+| Binary Heap Construction | O(n)            |  
+| Naive Removing           | O(n)            |
+| Removing with Hash Table | O(log(n))       |
+| Naive Contains           | O(n)            |
+| Contains with Hash Table | O(1)            |              
+
+#### Min Heaps
+- Parent node always has a lower value than its child nodes.
+
+#### Max Heaps
+- Parent node always has a greater value than its child nodes.
+
+#### Min/Max Heap Conversion
+- Important to be able to convert between Min Heaps and Max Heaps, since most programming languages only provide a standard Min Heap.
+- Simply negate comparable (comparator operands, not equals) interface to convert.
+	i.e. lex comparator for strings, where nlex is the negation.
+- Alternative method for numbers is to negate the numbers as they are inserted into the Priority Queue, and negate them again when taking numbers out. 
+	- Same effect as negating the comparator.
+
+
+
+
 
 - Maps/Sets
 	- Hash Tables
