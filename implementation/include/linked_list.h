@@ -26,6 +26,7 @@ class LinkedList
 public:
 	//type alias for consistency
 	using NodeId = const T;
+	using Position = const int;
 
 	//ctor
 	LinkedList();
@@ -44,11 +45,17 @@ public:
 
 	/*class methods*/
 	bool isEmpty() const;
+	bool isUnique(NodeId Id) const;
 	int getSize() const;
-	bool findNode(NodeId id) const;
-	void appendNode(NodeId id);
-	void prependNode(NodeId id);
-	void removeNode(NodeId id);
+	NodeId getNodeId(Position position) const;
+	Position getNodePosition(NodeId id) const;
+	void addFrontNode(NodeId id);
+	void addEndNode(NodeId id);
+	void insertNode(NodeId id, Position position);
+	void removeFrontNode();
+	void removeEndNode();
+	void removeNodeById(NodeId id);
+	void removeNodeByPosition(Position position);
 	void printLinkedList() const;
 	void reverseLinkedListRecursive();
 	void reverseLinkedListIterative();
