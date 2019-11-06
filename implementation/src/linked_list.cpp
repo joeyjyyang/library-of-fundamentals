@@ -11,7 +11,7 @@
 
 //ctor
 template <class T>
-LinkedList<T>::LinkedList() : head_{nullptr}
+LinkedList<T>::LinkedList() : head_{nullptr}, tail_{nullptr}, size_{}
 {
 	std::cout << "Linked List object instantiated." << std::endl;
 }
@@ -19,7 +19,7 @@ LinkedList<T>::LinkedList() : head_{nullptr}
 /*rule of 3*/
 //copy ctor
 template <class T>
-LinkedList<T>::LinkedList(const LinkedList<T>& other) : head_{nullptr}
+LinkedList<T>::LinkedList(const LinkedList<T>& other) : head_{nullptr}, tail_{nullptr}, size_{}
 {
 	Node* current{other.head_};
 	while (current != nullptr)
@@ -59,25 +59,37 @@ template <class U>
 void swapContents(LinkedList<U>& linked_list1, LinkedList<U>& linked_list2)
 {
 	std::swap(linked_list1.head_, linked_list2.head_);
+	std::swap(linked_list1.tail_, linked_list2.tail_);
 }
 
 /*class methods*/
 template <class T>
 bool LinkedList<T>::isEmpty() const 
 {
-	return head_ == nullptr;
+	return (head_ == nullptr && tail_ == nullptr && size_ == 0);
+}
+
+template <class T>
+int LinkedList<T>::getSize() const 
+{
+	return size_;
 }
 
 template <class T>
 bool LinkedList<T>::findNode(NodeId id) const 
 {
-	Node* current{head_};
-	while (current != nullptr)
+	if (isEmpty()) return false;
+	else if (head_->id_ == id || tail_->id_ == id) return true;
+	else 
 	{
-		if (current->id_ == id) return true;
-		else current = current->next_;
+		Node* current{head_};
+		while (current != nullptr)
+		{
+			if (current->id_ == id) return true;
+			else current = current->next_;
+		}
+		return false;
 	}
-	return false;
 }
 
 template <class T>
@@ -87,17 +99,14 @@ void LinkedList<T>::appendNode(NodeId id)
 	else
 	{
 		Node* temp = new Node{id};
-		if (isEmpty()) head_ = temp;
+		if (isEmpty()) head_ = tail_ = temp;
 		else 
 		{
-			Node* current{head_};
-			while (current->next_ != nullptr)
-			{
-				current = current->next_;
-			}
-			current->next_ = temp;
+			tail_->next_ = temp;
+			tail_ = temp;
 		}
 		std::cout << "Appending new node {id: " << temp->id_ << "} to end of Linked List." << std::endl;
+		size_++;
 	}
 }
 
@@ -114,6 +123,7 @@ void LinkedList<T>::prependNode(NodeId id)
 		}
 		head_ = temp;
 		std::cout << "Prepending new node {id: " << temp->id_ << "} to beginning of Linked List." << std::endl;
+		size_++;
 	}
 }
 
@@ -122,7 +132,15 @@ void LinkedList<T>::removeNode(NodeId id)
 {
 	if (isEmpty()) std::cout << "Error: the Linked List is empty." << std::endl;
 	else if (!findNode(id)) std::cout << "Error: the specified does not exist in the Linked List." << std::endl;
-	else 
+	else if (head_->id_ == id)
+	{
+		std::cout << "Removing node {id: " << head_->id_ << "}." << std::endl;
+		Node* temp{head_};
+		head_ = head_->next_;
+		delete temp;
+		size_--;
+	}
+	else
 	{
 		Node* current{head_};
 		Node* trail{nullptr};
@@ -131,18 +149,10 @@ void LinkedList<T>::removeNode(NodeId id)
 			if (current->id_ == id)
 			{
 				std::cout << "Removing node {id: " << current->id_ << "}." << std::endl;
-				if (trail == nullptr)
-				{
-					head_ = head_->next_;
-					delete current;
-					current = head_;
-				}
-				else
-				{
-					current = current->next_;
-					delete trail->next_;
-					trail->next_ = current;
-				}
+				if (current == tail_) tail_ = trail;
+				current = current->next_;
+				delete trail->next_;
+				trail->next_ = current;	
 			}
 			else
 			{
@@ -150,6 +160,7 @@ void LinkedList<T>::removeNode(NodeId id)
 				current = current->next_;
 			}
 		}
+		size_--;
 	}
 }
 
@@ -160,7 +171,7 @@ void LinkedList<T>::printLinkedList() const
 	else 
 	{
 		Node* current{head_};
-		std::cout << "Printing nodes of Linked List." << std::endl;
+		std::cout << "Printing nodes of Linked List with total of " << size_ << " nodes." << std::endl;
 		int position{}; //zero initialization
 		while (current != nullptr) 
 		{
@@ -174,12 +185,14 @@ void LinkedList<T>::printLinkedList() const
 template <class T>
 void LinkedList<T>::reverseLinkedListRecursive() 
 {	
-	if (head_->next_ == nullptr) return;
+	if (head_ == tail_) return;
 	Node* current{head_};
 	head_ = current->next_;
 	reverseLinkedListRecursive();
-	current->next_->next_ = current;
+	tail_->next_ = current;
+	//current->next_->next_ = current;
 	current->next_ = nullptr;
+	tail_ = current;
 }
 
 template <class T>
@@ -187,6 +200,7 @@ void LinkedList<T>::reverseLinkedListIterative()
 {
 	Node* current{head_};
 	Node* trail{nullptr};
+	tail_ = head_;
 	while (current != nullptr)
 	{
 		current = head_->next_;
@@ -207,29 +221,30 @@ void LinkedList<T>::mergeSortLinkedList()
 //explicit instantiation of template into current compilation unit
 template class LinkedList<char>;
 template class LinkedList<int>;
-template class LinkedList<double>;
-template class LinkedList<std::string>;
 
 template void swapContents(LinkedList<char>& linked_list1, LinkedList<char>& linked_list2);
 template void swapContents(LinkedList<int>& linked_list1, LinkedList<int>& linked_list2);
-template void swapContents(LinkedList<double>& linked_list1, LinkedList<double>& linked_list2);
-template void swapContents(LinkedList<std::string>& linked_list1, LinkedList<std::string>& linked_list2);
 
 int main(int argc, char* argv[])
 {
 	std::cout << "---- Test Case #1: Printing, Adding, and Removing ----" << std::endl;
 	{
 		LinkedList<int>* dummy_list1 = new LinkedList<int>();
+		dummy_list1->removeNode(2);
 		dummy_list1->appendNode(3);
+		dummy_list1->removeNode(10);
 		dummy_list1->prependNode(2);
 		dummy_list1->appendNode(4);
 		dummy_list1->prependNode(4);
 		dummy_list1->prependNode(1);
 		dummy_list1->appendNode(1);
+		dummy_list1->appendNode(5);
+		dummy_list1->appendNode(6);
 		dummy_list1->printLinkedList();
 		std::cout << "--------------" << std::endl;
 
 		dummy_list1->removeNode(2);
+		dummy_list1->removeNode(6);
 		dummy_list1->printLinkedList();
 		std::cout << "--------------" << std::endl;
 

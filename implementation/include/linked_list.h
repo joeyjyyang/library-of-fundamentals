@@ -44,6 +44,7 @@ public:
 
 	/*class methods*/
 	bool isEmpty() const;
+	int getSize() const;
 	bool findNode(NodeId id) const;
 	void appendNode(NodeId id);
 	void prependNode(NodeId id);
@@ -61,6 +62,8 @@ private:
 		Node(NodeId id) : id_{id}, next_{nullptr} {}
 	};
 	Node* head_;
+	Node* tail_;
+	int size_;
 };
 
 #endif // LINKED_LIST_H

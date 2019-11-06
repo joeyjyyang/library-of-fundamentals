@@ -240,8 +240,53 @@ Implementations of essential data structures and algorithms.
 - Alternative method for numbers is to negate the numbers as they are inserted into the Priority Queue, and negate them again when taking numbers out. 
 	- Same effect as negating the comparator.
 
+### Union Find (Disjoint Set)
+- Data structure that keeps track of elements which are split into one or more disjoint sets.
+- Two primary operations, find and union.
+	- Find reports which subset/group the given element belongs to.
+	- Union merges (unifies) two subsets together.
 
+#### Union Find Usages
+- Kruskal's Minimum Spanning Tree algorithm
+- Grid percolation
+- Network connectivity
+- Least common ancestor in trees
+- Image processing
 
+#### Union Find (Worst Case) Time Complexities
+|                    | Union Find |
+| ------------------ | ---------- | 
+| Construction       | O(n)       |       
+| Union              | a(n)       |      
+| Find               | a(n)       |         
+| Get Component Size | a(n)       |  
+| Check if Connected | a(n)       |
+| Count Components   | O(1)       |
+- Amortized constant time a(n).
+	- Nearly constant time O(n)
+
+#### Kruskal's Minimum Spanning Tree
+- A subset of the edges of a Graph which connect all vertices in the graph with the minimal total edge cost.
+- Not necessarily unique.
+- All edges must be sorted by ascending weight first.
+- Traverse through sorted edges and look at the two nodes the edge belongs to.
+	- If nodes already unified, do not include the edge; otherwise, include the edge and unify the nodes into the appropriate group.
+- Algorithm terminates when every edge has been processed or all the vertices have been unified into a single group.
+- Ignore and do not create edge for elements already in the same group to prevent cycles.
+	- Use find operation to check which group(s) the elements belong to.
+- Merge elements into same group if both elements are currently in different groups.
+	- Use union operation to merge groups together efficiently.
+	- Smaller group gets merged into larger group.
+
+#### Union and Find Operations
+
+##### Creating Union Find
+- First construct a bijection (a mapping) between the n objects and the integers in range [0, n).
+	- Random assignment, as long as one-to-one mapping.
+	- Not necessary, but allows for construction of an array-based union find, which is efficient and easy to work with.
+- Subsequently store Union Find information in an array.
+	- Each index has an associated object (i.e. letter) which can be looked-up through mapping.
+	- Each object initially points to itself, as the in
 
 
 - Maps/Sets
