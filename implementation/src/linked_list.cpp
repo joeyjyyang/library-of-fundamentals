@@ -81,8 +81,8 @@ int LinkedList<T>::getSize() const
 	return size_;
 }
 
-template <class T>
-const T LinkedList<T>::getNodeId(Position position) const
+template <typename T>
+typename LinkedList<T>::NodeId LinkedList<T>::getNodeId(Position position) const
 {
 	if (position < 0 || position > getSize()) 
 	{
@@ -106,7 +106,7 @@ const T LinkedList<T>::getNodeId(Position position) const
 }
 
 template <class T>
-const int LinkedList<T>::getNodePosition(NodeId id) const 
+typename LinkedList<T>::Position LinkedList<T>::getNodePosition(NodeId id) const 
 {
 	if (isEmpty()) return -1;
 	else 
