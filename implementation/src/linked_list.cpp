@@ -91,8 +91,14 @@ typename LinkedList<T>::NodeId LinkedList<T>::getNodeId(Position position) const
 	}
 	else
 	{
-		if (position == 0) return head_->id_;
-		else if (position == getSize() - 1) return tail_->id_;
+		if (position == 0) 
+		{
+				return head_->id_;
+		}
+		else if (position == getSize() - 1)
+		{
+	 		return tail_->id_;
+		}
 		else
 		{
 			Node* temp{head_};
@@ -108,11 +114,20 @@ typename LinkedList<T>::NodeId LinkedList<T>::getNodeId(Position position) const
 template <class T>
 typename LinkedList<T>::Position LinkedList<T>::getNodePosition(NodeId id) const 
 {
-	if (isEmpty()) return -1;
+	if (isEmpty()) 
+	{
+		return -1;
+	}
 	else 
 	{
-		if (head_->id_ == id) return 0;
-		else if (tail_->id_ == id) return (getSize() - 1);
+		if (head_->id_ == id) 
+		{
+			return 0;
+		}
+		else if (tail_->id_ == id) 
+		{
+			return (getSize() - 1);
+		}
 		else 
 		{
 			int position{0};
@@ -123,7 +138,10 @@ typename LinkedList<T>::Position LinkedList<T>::getNodePosition(NodeId id) const
 				{
 					return position;
 				}
-				else current = current->next_;
+				else 
+				{
+					current = current->next_;
+				}
 				position++;
 			}
 			return -1;
@@ -139,7 +157,10 @@ void LinkedList<T>::addEndNode(NodeId id)
 	{
 		std::cout << "Appending new node {id: " << id << "} to end of Linked List." << std::endl;
 		Node* temp = new Node{id};
-		if (isEmpty()) head_ = tail_ = temp;
+		if (isEmpty()) 
+		{
+			head_ = tail_ = temp;
+		}
 		else 
 		{
 			tail_->next_ = temp;
@@ -152,12 +173,18 @@ void LinkedList<T>::addEndNode(NodeId id)
 template <class T>
 void LinkedList<T>::addFrontNode(NodeId id) 
 {
-	if (!isUnique(id)) std::cout << "Error: new node must have unique id. Could not add new node as this id already exists." << std::endl;
+	if (!isUnique(id)) 
+	{
+		std::cout << "Error: new node must have unique id. Could not add new node as this id already exists." << std::endl;
+	}
 	else
 	{
 		std::cout << "Prepending new node {id: " << id << "} to beginning of Linked List." << std::endl;
 		Node* temp = new Node{id};
-		if (isEmpty()) head_ = tail_ = temp;
+		if (isEmpty()) 
+		{
+			head_ = tail_ = temp;
+		}
 		else
 		{
 			temp->next_ = head_;
@@ -170,10 +197,22 @@ void LinkedList<T>::addFrontNode(NodeId id)
 template <class T>
 void LinkedList<T>::insertNode(NodeId id, Position position) 
 {
-	if (!isUnique(id)) std::cout << "Error: new node must have unique id. Could not add new node as this id already exists." << std::endl;
-	else if (position < 0 || position > getSize()) std::cout << "Error: position invalid." << std::endl;
-	else if (position == 0) addFrontNode(id);
-	else if (position == getSize()) addEndNode(id);
+	if (!isUnique(id)) 
+	{
+		std::cout << "Error: new node must have unique id. Could not add new node as this id already exists." << std::endl;
+	}
+	else if (position < 0 || position > getSize()) 
+	{
+		std::cout << "Error: position invalid." << std::endl;
+	}
+	else if (position == 0) 
+	{
+		addFrontNode(id);
+	}
+	else if (position == getSize()) 
+	{
+		addEndNode(id);
+	}
 	else
 	{
 		Node* temp = new Node{id};
@@ -192,7 +231,10 @@ void LinkedList<T>::insertNode(NodeId id, Position position)
 template <class T>
 void LinkedList<T>::removeFrontNode() 
 {
-	if (isEmpty()) std::cout << "Error: the Linked List is empty." << std::endl;
+	if (isEmpty()) 
+	{
+		std::cout << "Error: the Linked List is empty." << std::endl;
+	}
 	else
 	{
 		std::cout << "Removing node {id: " << head_->id_ << "} at front of Linked List." << std::endl;
@@ -206,7 +248,10 @@ void LinkedList<T>::removeFrontNode()
 template <class T>
 void LinkedList<T>::removeEndNode() 
 {
-	if (isEmpty()) std::cout << "Error: the Linked List is empty." << std::endl;
+	if (isEmpty()) 
+	{
+		std::cout << "Error: the Linked List is empty." << std::endl;
+	}
 	else
 	{
 		std::cout << "Removing node {id: " << tail_->id_ << "} at end of Linked List." << std::endl;
@@ -225,12 +270,24 @@ void LinkedList<T>::removeEndNode()
 template <class T>
 void LinkedList<T>::removeNodeById(NodeId id) 
 {
-	if (isEmpty()) std::cout << "Error: the Linked List is empty." << std::endl;
-	else if (getNodePosition(id) < 0) std::cout << "Error: the specified node {id: " << id << "} does not exist in the Linked List." << std::endl;
+	if (isEmpty()) 
+	{
+		std::cout << "Error: the Linked List is empty." << std::endl;
+	}
+	else if (getNodePosition(id) < 0) 
+	{
+		std::cout << "Error: the specified node {id: " << id << "} does not exist in the Linked List." << std::endl;
+	}
 	else 
 	{
-		if (head_->id_ == id) removeFrontNode();
-		else if (tail_->id_ == id) removeEndNode();
+		if (head_->id_ == id) 
+		{
+			removeFrontNode();
+		}
+		else if (tail_->id_ == id) 
+		{
+			removeEndNode();
+		}
 		else
 		{
 			std::cout << "Removing node {id: " << id << "} from Linked List." << std::endl;
@@ -258,11 +315,20 @@ void LinkedList<T>::removeNodeById(NodeId id)
 template <class T>
 void LinkedList<T>::removeNodeByPosition(Position position) 
 {
-	if (position < 0 || position >= getSize()) std::cout << "Error: position invalid." << std::endl;
+	if (position < 0 || position >= getSize()) 
+	{
+		std::cout << "Error: position invalid." << std::endl;
+	}
 	else
 	{
-		if (position == 0) removeFrontNode();
-		else if (position == getSize() - 1) removeEndNode();
+		if (position == 0) 
+		{
+			removeFrontNode();
+		}
+		else if (position == getSize() - 1) 
+		{
+			removeEndNode();
+		}
 		else
 		{
 			std::cout << "Removing node at position: " << position << " from Linked List." << std::endl;
@@ -283,7 +349,10 @@ void LinkedList<T>::removeNodeByPosition(Position position)
 template <class T>
 void LinkedList<T>::printLinkedList() const 
 {
-	if (isEmpty()) std::cout << "Error: the Linked List is empty." << std::endl;
+	if (isEmpty()) 
+	{
+		std::cout << "Error: the Linked List is empty." << std::endl;
+	}
 	else 
 	{
 		Node* current{head_};
@@ -301,7 +370,10 @@ void LinkedList<T>::printLinkedList() const
 template <class T>
 void LinkedList<T>::reverseLinkedListRecursive() 
 {	
-	if (head_ == tail_) return;
+	if (head_ == tail_) 
+	{
+		return;
+	}
 	Node* current{head_};
 	head_ = current->next_;
 	reverseLinkedListRecursive();
