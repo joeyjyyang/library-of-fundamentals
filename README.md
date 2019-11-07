@@ -3,13 +3,13 @@ Implementations of essential data structures and algorithms.
 
 ## Background
 
-### What are Data Structures?
+### What is a Data Structure?
 - Way of organizing data so it can be used (i.e. accessed, queried, updated, etc.) effectively.
 - Essential ingredient in creating fast and powerful algorithms.
 - Helps manage and organize data (in a natural way).
 - Makes code cleaner and easier to understand.
 
-### What are Abstract Data Types?
+### What is an Abstract Data Type?
 - Abstraction of a data structure which only provides the interface to which the data structure must adhere to.
 	- The interface does not give any specific details about how something should be implemente or in what programming language. 
 - i.e. Lists, Stacks, Queues, Priority Queues, Maps, Trees, Graphs, etc.
@@ -22,21 +22,21 @@ Implementations of essential data structures and algorithms.
 - Gives an upper bound of the complexity in the worse case, helping quantify performance as the input size n becomes arbitrarily large (theoretically to infinity; thus, ignore constants and multiplicative factors). 
 
 #### Time Complexities and Big-O Notations 
-- Constant time: O(1)	
+- Constant time: O(1).	
 	- i.e. access array element by index.
-- Logarithmic time: O(log(n))
+- Logarithmic time: O(log(n)).
 	- i.e. binary search.
-- Linear time: O(n)
+- Linear time: O(n).
 	- i.e. searching for element in unsorted array.
-- Linearithmic time: O(nlog(n))
+- Linearithmic time: O(nlog(n)).
 	- i.e. mergesort. 
-- Quadratic time: O(n^2)
+- Quadratic time: O(n^2).
 	- i.e. nested for loops.
-- Cubic time: O(n^3)
+- Cubic time: O(n^3).
 	- i.e. nested for loops.
-- Exponential time: O(b^n), b > 1
+- Exponential time: O(b^n), b > 1.
 	- i.e. finding all subsets of a set.
-- Factorial Time: O(n!)
+- Factorial Time: O(n!).
 	- i.e. finding all permutations of a string.
 
 ## Data Structures
@@ -62,14 +62,15 @@ Implementations of essential data structures and algorithms.
 		- Exponential growth rate (i.e. growth factor of 2) to keep time complexity of insertions constant O(1).
 - **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/dynamicarray/DynamicArray.java
 
-#### Array (Worst Case) Time Complexities
-|           | Static Arrays | Dynamic Arrays |
-| --------- | ------------- | -------------- |
-| Access    | O(1)          | O(1)           |
-| Search    | O(n)          | O(n)           |
-| Insertion | N/A           | O(n)           |
-| Appending | N/A           | O(1)           |
-| Deletion  | N/A           | O(n)           |
+#### Array Time Complexities
+| Operations | Static Arrays | Dynamic Arrays |
+|            | Worst Case    | Worst Case     |
+| ---------- | ------------- | -------------- |
+| Access     | O(1)          | O(1)           |
+| Search     | O(n)          | O(n)           |
+| Insertion  | N/A           | O(n)           |
+| Appending  | N/A           | O(1)           |
+| Deletion   | N/A           | O(n)           |
 
 
 ### Linked Lists
@@ -97,7 +98,8 @@ Implementations of essential data structures and algorithms.
 - **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/linkedlist/DoublyLinkedList.java
 
 #### Linked Lists (Worst Case) Time Complexities
-|                  | Singly Linked Lists | Doubly Linked Lists |
+| Operations       | Singly Linked Lists | Doubly Linked Lists |
+|                  | Worst Case          | Worst Case          |
 | ---------------- | ------------------- | ------------------- |
 | Search           | O(n)                | O(n)                |
 | Insert at Head   | O(1)                | O(1)                |
@@ -121,13 +123,13 @@ Implementations of essential data structures and algorithms.
 - Depth First Search (DFS) traversal on a Graph in Graph Theory.
 
 #### Stack (Worst Case) Time Complexities
-|           | Stacks |
-| --------- | ------ | 
-| Pushing   | O(1)   |       
-| Popping   | O(1)   |      
-| Peeking   | O(1)   |         
-| Searching | O(n)   |    
-| Size      | O(1)   |         
+| Operations | Worst Case |
+| ---------- | ---------- | 
+| Pushing    | O(1)       |       
+| Popping    | O(1)       |        
+| Peeking    | O(1)       |         
+| Searching  | O(n)       |    
+| Size       | O(1)       |         
 
 ### Queues
 - A linear data structure which models real world queues by having two primary operations, namely enqueue (adding element to end) and dequeue (removing element from front).
@@ -141,15 +143,15 @@ Implementations of essential data structures and algorithms.
 - Web server request management where you want first come first serve.
 - Breadth First Search (BFS) traversal on a Graph in Graph Theory.
 
-#### Queue (Worst Case) Time Complexities
-|          | Queues | 
-| -------- | ------ | 
-| Enqueue  | O(1)   |       
-| Dequeue  | O(1)   |      
-| Peeking  | O(1)   |         
-| Contains | O(n)   |    
-| Removal  | O(n)   | 
-| Is Empty | O(1)   | 
+#### Queue Time Complexities
+| Operations | Worst Case | 
+| ---------- | ---------- | 
+| Enqueue    | O(1)       |       
+| Dequeue    | O(1)       |      
+| Peeking    | O(1)       |          
+| Contains   | O(n)       |    
+| Removal    | O(n)       | 
+| Is Empty   | O(1)       | 
 
 ### Priority Queues
 - An abstract data type that operates similar to a normal queue except that each element has a certain priority. 
@@ -183,17 +185,17 @@ Implementations of essential data structures and algorithms.
 #### Inserting Elements into Binary Heaps
 - The structure of a Binary Heap used for a Priority Queue should always be in the form of a Complete Binary Tree to maintain an insertion point.
 	- Every level, except possibly the last level, is filled and all nodes are as far left as possible. 
-	- Nodes are inserted at the bottom level as far left as possible to maintain this property.
-	- The inserted node is bubbled up (swimming) until it no longer violates the heap invariant and is in the correct position.
+		1. Nodes are inserted at the bottom level as far left as possible to maintain this property.
+		2. The inserted node is bubbled up (swimming) until it no longer violates the heap invariant and is in the correct position.
 
 #### Removing Elements from Binary Heaps
 
 ##### Removing the Root Node (Polling)
 - Generally want to always remove the root node (polling), which has the highest priority.
 	- Do not need to search, as the root node has index 0 in the array.
-- Before removing root node, it is swapped with the last node of the Binary Heap (in the last index of the array).
-- After the root node is removed, the swapped node is bubbled down (sinking) to satisfy the heap invariant.
-	- Remember to swap with left child node when bubbling down if two child nodes have the same value.
+	1. Before removing root node, it is swapped with the last node of the Binary Heap (in the last index of the array).
+	2. After the root node is removed, the swapped node is bubbled down (sinking) to satisfy the heap invariant.
+		- Remember to swap with left child node when bubbling down if two child nodes have the same value.
 
 ##### Removing Elements in O(n)
 - When removing nodes which are not the root node, the swap (with last node), remove, then bubble idiom is still used; however, could either bubble up (swim) or bubble down (swim).
@@ -216,16 +218,16 @@ Implementations of essential data structures and algorithms.
 - Used by Minimum Spanning Tree (MST) algorithms on Directed Graphs.
 
 #### Priority Queue (Worst Case) Time Complexities
-|                          | Priority Queues |
-| ------------------------ | --------------- | 
-| Polling                  | O(log(n))       |       
-| Peeking                  | O(1)            |      
-| Adding                   | O(log(n))       |         
-| Binary Heap Construction | O(n)            |  
-| Naive Removing           | O(n)            |
-| Removing with Hash Table | O(log(n))       |
-| Naive Contains           | O(n)            |
-| Contains with Hash Table | O(1)            |              
+| Operations               | Worst Case |
+| ------------------------ | ---------- | 
+| Polling                  | O(log(n))  |          
+| Peeking                  | O(1)       |           
+| Adding                   | O(log(n))  |              
+| Binary Heap Construction | O(n)       |       
+| Naive Removing           | O(n)       |     
+| Removing with Hash Table | O(log(n))  |     
+| Naive Contains           | O(n)       |     
+| Contains with Hash Table | O(1)       |                   
 
 #### Min Heaps
 - Parent node always has a lower value than its child nodes.
@@ -247,14 +249,14 @@ Implementations of essential data structures and algorithms.
 	- Union merges (unifies) two subsets together.
 
 #### Union Find Usages
-- Kruskal's Minimum Spanning Tree algorithm
-- Grid percolation
-- Network connectivity
-- Least common ancestor in trees
-- Image processing
+- Kruskal's Minimum Spanning Tree algorithm.
+- Grid percolation.
+- Network connectivity.
+- Least common ancestor in trees.
+- Image processing.
 
-#### Union Find (Worst Case) Time Complexities
-|                    | Union Find |
+#### Union Find Time Complexities
+| Operations         | Worst Case |
 | ------------------ | ---------- | 
 | Construction       | O(n)       |       
 | Union              | a(n)       |      
@@ -288,6 +290,63 @@ Implementations of essential data structures and algorithms.
 	- Each index has an associated object (i.e. letter) which can be looked-up through mapping.
 	- Each object initially points to itself, as the in
 
+### Binary Search Trees
+
+#### What is a Tree?
+- Undirected graph which satisfies any of the following definitions:
+	- An acyclic connected graphs.
+	- A connected graph with N nodes and N-1 edges
+	- A graph in which any two vertices are connected by exactly one path; otherwise, there is a cycle (another route to get to the node).
+- The root node is the top-most node of the tree.
+- A child node is a node extend from another node, while 
+- Leaf nodes do not have children, and are at the bottom-most level of the tree.
+
+#### Tree Usages
+- Filesystems.
+	- The parent of the root directory (node) is the root itself.
+
+#### What is a Binary Tree?
+- A tree for which every mode has at most two child nodes.
+
+#### What is a Binary Search Tree?
+- A Binary Tree that satisfies the Binary Search Tree invariant: left subtree has smaller elements and right subtree has larger elements.
+	- Elements must be comparable to be ordered.
+	- Invariant is modified depending on whether or not duplicates are allowed.
+		- Binary Search Tree operations allow for duplicates; however, usually interested only in having unique elements inside the tree.
+
+#### Binary Search Tree Usages
+- Implementation of some Map and Set abstract data types.
+- Red Black Trees.
+- AVL Trees.
+- Splay Trees.
+- Used to implementation binary heaps.
+- Syntax Trees (used by compiler and calculators)
+- Treap - a probabilistic data structure.
+
+#### Binary Search Tree Time Complexities
+| Operations | Average Case | Worst Case |
+| ---------- | ------------ | ---------- |
+| Insert     | O(log(n))    | O(n)       |
+| Delete     | O(log(n))    | O(n)       |         
+| Remove     | O(log(n))    | O(n)       |        
+| Search     | O(log(n))    | O(n)       |            
+- Worst case linear O(n) time is addressed using Balanced or Self-Balancing Binary Search Trees.
+
+#### Inserting Elements into Binary Search Trees
+- Start at root node, then begin comparing the element's value to the value stored in the node currently being considered, then:
+	- Recurse down left subtree if less than (<) case.
+	- Recurse down right subtree if greater than (>) case.
+	- Handle finding a duplicate value if equal (=) case.
+	- Create a new node if found a null leaf node (null reference).
+
+#### Removing Elements from Binary Search Trees
+- Can be seen as a two step process:
+	1. Find the element to be removed (if it exists).
+		- Traverse in accordance to Binary Search Tree invariant.
+	2. Replace the node to be removed with its successor (if any) to maintain the Binary Search Tree invariant.
+		- In the case where the node to be removed has both left and right child nodes (which may or may not be subtrees), there are two successors.
+			- The successor can either be the largest value in the left subtree (dig as far right as possible) or the smallest value in the right subtree (dig as far left as possible). 
+			- It is guaranteed that the successfor will not have two child nodes/subtrees.
 
 - Maps/Sets
 	- Hash Tables
