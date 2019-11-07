@@ -353,6 +353,7 @@ Implementations of essential data structures and algorithms.
 
 ##### Pre-Order, In-Order, and Post-Order Traversals 
 - Naturally defined recursively.
+	- Note that can be done iteratively; however, requires a stack (or multiple stacks) as an auxiliary data structure.
 - Depth-First Search (DFS) methods.
 	- Make use of the call stack.
 		- Pushing off recursive calls when the subtree of a node is visited.
