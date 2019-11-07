@@ -313,6 +313,7 @@ Implementations of essential data structures and algorithms.
 	- Elements must be comparable to be ordered.
 	- Invariant is modified depending on whether or not duplicates are allowed.
 		- Binary Search Tree operations allow for duplicates; however, usually interested only in having unique elements inside the tree.
+- **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/binarysearchtree/BinarySearchTree.java
 
 #### Binary Search Tree Usages
 - Implementation of some Map and Set abstract data types.
@@ -348,6 +349,45 @@ Implementations of essential data structures and algorithms.
 			- The successor can either be the largest value in the left subtree (dig as far right as possible) or the smallest value in the right subtree (dig as far left as possible). 
 			- It is guaranteed that the successfor will not have two child nodes/subtrees.
 
+#### Tree Traversals
+
+##### Pre-Order, In-Order, and Post-Order Traversals 
+- Naturally defined recursively.
+- Depth-First Search (DFS) methods.
+	- Make use of the call stack.
+		- Pushing off recursive calls when the subtree of a node is visited.
+- Begin traversal at root node.
+- Differences in when the current parent node's value is printed relative to the recursive calls to child nodes.
+	- Involves pushing the recursive traversal call off of the call stack for the child node that was just visited and recursing back up to parent node, before recursing back down again to next child node.
+
+###### Pre-Order Traversal
+- Print before recursive calls.
+	- Prints the value of the current node, then traverse the left subtree, followed by the right subtree.
+
+###### In-Order Traversal
+- Print between recursive calls.
+	- Traverse the left subtree, then print the value of the node, and continue traversing the right subtree.
+- Note that with a Binary Search Tree, the values are printed in increasing order through inorder traversal.
+
+###### Post-Order Traversal
+- Print after recursive calls.
+	- Traverse the left subtree, followed by the right subtree, then print the value of the node.
+- The value of the root node is last to be print, as the entire left and right subtrees of the root node must be traversed through first and printed.
+
+#### Level Order Traversal
+- Naturally defined iteratively.
+- Breadth-First Search (BFS) methods.
+	- Make use of a queue as an auxiliary data structure.
+		- Keeps track of the nodes left to explore.
+		- Begin with the root node inside of the queue, and finish when the queue is empty.
+		- At each iteration level, remove the current node from the queue, print the value of the current node, and add the left child and right child of the current node to the queue.
+- Begin traversal at root node.
+- Print the nodes as they appear one layer at a time.
+
+
+
+
+## Unfinished
 - Maps/Sets
 	- Hash Tables
 - Trees
