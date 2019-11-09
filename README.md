@@ -85,7 +85,7 @@ Implementations of essential data structures and algorithms.
 - Implementing Lists, Queues, and Stacks abstract data types (due to great time complexities for adding and removing elements).
 - Creating circular lists.
 - Modelling real world objects such as trains.
-- Used in separate chaining due handle collisions in Hashtable implementations.
+- Used in separate chaining due handle collisions in Hash Table implementations.
 - Implementing adjacency lists for Graphs.
 
 #### Singly Linked Lists
@@ -202,11 +202,11 @@ Implementations of essential data structures and algorithms.
 - Inefficiency from performing a linear search of the index of the node to be removed before swapping. 
 
 ##### Removing Elements in O(log(n))
-- Leverages a Hashtable for easy lookup of where the node to be removed is indexed at in the array.
-	- Hashtables provide constant time O(1) lookup and update for a mapping from a key (node value) to a value (node index).
+- Leverages a Hash Table for easy lookup of where the node to be removed is indexed at in the array.
+	- Hash Tables provide constant time O(1) lookup and update for a mapping from a key (node value) to a value (node index).
 - To deal with multiple nodes having the same value, instead of mapping one value to one position, map one value to multiple positions (at each index where duplicate exists).
 	- Using a Set or Tree Set of indexes (value) for which a particular node value (key) maps to.
-	- Swapping (and removal) occurs in Tree (for nodes) but also in the Hashtable (for indexes).
+	- Swapping (and removal) occurs in Tree (for nodes) but also in the Hash Table (for indexes).
 	- Note that it does not matter which duplicate node is removed, as long as the heap invariant is satisfied in the end. 
 
 #### Priority Queue Usages
@@ -385,8 +385,79 @@ Implementations of essential data structures and algorithms.
 - Begin traversal at root node.
 - Print the nodes as they appear one layer at a time.
 
+### Hash Tables
+- Data structure that provides a mapping of key-value pairs using a technique called hashing.
+	- Keys must be unique and hashable, but values can be repeated.
+- Often used to track item frequencies.
+	- i.e. Counting the number of times a word appears in a given text.
+- Provides very fast insertion, lookup, and removal time for data of constant O(1) time (in average case) by using a hash function as a way to index into the hash table.
 
+#### What is a Hash Function?
+- A function that maps a key x to a whole number in a fixed range.
+	- Determines the index in the Array where the key-value pair will be stored.
+- mod (%) capacity will return an integer in the domain of [0, capacity) exclusive at the end.
+	- i.e. hash function H(x), where H(x) = (x^2 - 6x + 9) mod 10 maps all integer keys x to the range [0,9] inclusive, where the capacity of the auxiliary Array is 10.
+- Hash functions can also be defined for arbitrary objects such as strings, lists, tuples, multi-data objects, etc.
+	- i.e. for a string s, let H(s) be a hash function that calculates the sum of ASCII values of characters in the string, and applies mod 50 to the sum.
+		- Effectively converted a string to an integer number.
+- Lookup can be done by computing the hash value of a key, and looking at the key-value pair stored at that hash value index.
 
+##### Properties of Hash Functions
+- If the hash values of x and y are equal H(x) = H(y), then x and y might be equal.
+	- Need to explicitly check x against y.
+- If the hash values of x and y are not equal H(x) != H(y), then x and y are certainly not equal.
+- Comparing precomputed hash values takes constant O(1) time, and can speed up comparison of large objects (i.e. files) rather than slowly comparing the actual contents.
+	- Note that hash functions for files are complicated hash functions called crytographic hash functions or checksums.
+- It is critical that a hash function must be deterministic.
+	- If H(x) = y, then H(x) must always produce y and never another value.
+- Important to try and create a uniform hash function.
+
+##### Hash Collisions
+- Occurs when two x and y objects hash to the same value H(x) = H(y).
+- Try to make uniform hash functions to minimize the number of hash collisions.
+- Can be resolved using two popular methods:
+	1. Separate Chaining
+	2. Open Addressing
+
+##### Hashable Keys
+- To enforce deterministic hash functions, keys of type T must be immutable.
+	- Hence, if a key of type T is immutable, and given a hash function H(k) defined for all keys k of type T, then a key of type T is hashable.
+
+#### Hash Table Time Complexities
+| Operations | Average Case | Worst Case |
+| ---------- | ------------ | ---------- |
+| Insertion  | O(1)         | O(n)       |
+| Removal    | O(1)         | O(n)       |         
+| Search     | O(1)         | O(n)       |
+- Note that the constant O(1) time is attributed to hash tables is only true if the hash function is uniform.	
+
+#### Separate Chaining
+- One of many hash collision resolution strategies.
+- Maintains an auxiliary data structure (usually a Linked List) to hold all different values which hashed to a particular value.
+	- Bucket behaviour.
+	- Each index position in the Array is a Linked List.
+- Upon hash collision, a new node is appended to the Linked List at the hash value index.
+- Items with the same hash value are distinguished based on their unique keys, as the key-value pairs are stored in each node.
+- To maintain constant O(1) time, Hash Tables with a lot of elements and long Linked Lists should be rehashed and dispersed throughout a new Hash Table with larger capacity. 
+	- Dependent on the Load Factor.
+		- Load Factor = # Current Items / # Size 
+- **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/hashtable/HashTableSeperateChaining.java
+
+##### Removing Key-Value Pairs with Separate Chaining
+- Apply lookup procedure, then simply remove the corresponding node from the Linked List at the hash value index.
+
+#### Open Addressing
+- Key-value pairs are stored in the Hash Table (Array) itself, as opposed to an auxiliary data structure (i.e. Linked List) in Separate Chaining.
+- Must be careful about Load Factor, or the size of the Hash Table vs. the number of elements currently stored inside. 
+	- The Hash Table size must be increased (usually exponentially, i.e. double) once the Load Factor exceeds a specified threshold.
+- Upon hash collision, use a probing sequence P(x) to determine an appropriate offset position.
+	- This process is repeated until an unoccupied slot is found.
+		- i.e. collision at H(k), probe forward until empty position found.
+
+##### Probing Sequences
+- There are an infinite amount of probing sequences that could be used.
+1. Linear Probing
+2. Quadratic Probing
 
 ## Unfinished
 - Maps/Sets
