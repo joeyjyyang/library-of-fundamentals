@@ -54,6 +54,9 @@ Implementations of essential data structures and algorithms.
 #### Static Arrays
 - Fixed length container containing n indexable elements.
 - Given as contiguous chunks of memory; memory addresses of elements are adjacent.
+- Prefix Sum Arrays can be used on Static Arrays to optimize accessing the sum of data between certain ranges/intervals from linear O(n) time to constant O(1) time.
+	- Flaw in that when updating a value in the original array, the entire Prefix Sum Array must be recalculated, which takes linear O(n) time.
+		- Resolved using the Fenwick Tree/Binary Index Tree data structure.
 
 #### Dynamic Arrays
 - Can grow and shrink in size.
@@ -197,11 +200,11 @@ Implementations of essential data structures and algorithms.
 	2. After the root node is removed, the swapped node is bubbled down (sinking) to satisfy the heap invariant.
 		- Remember to swap with left child node when bubbling down if two child nodes have the same value.
 
-##### Removing Elements in O(n)
+##### Naively Removing Elements in Linear O(n) Time
 - When removing nodes which are not the root node, the swap (with last node), remove, then bubble idiom is still used; however, could either bubble up (swim) or bubble down (swim).
 - Inefficiency from performing a linear search of the index of the node to be removed before swapping. 
 
-##### Removing Elements in O(log(n))
+##### Removing Elements in Logarithmic O(log(n)) Time
 - Leverages a Hash Table for easy lookup of where the node to be removed is indexed at in the array.
 	- Hash Tables provide constant time O(1) lookup and update for a mapping from a key (node value) to a value (node index).
 - To deal with multiple nodes having the same value, instead of mapping one value to one position, map one value to multiple positions (at each index where duplicate exists).
@@ -453,20 +456,110 @@ Implementations of essential data structures and algorithms.
 - Upon hash collision, use a probing sequence P(x) to determine an appropriate offset position.
 	- This process is repeated until an unoccupied slot is found.
 		- i.e. collision at H(k), probe forward until empty position found.
+- Extremely sensitive to the hashing function and probing function used for probing sequence.
+	- A poor decision can result in Chaos Cycles.
 
 ##### Probing Sequences
-- There are an infinite amount of probing sequences that could be used.
+- General concept of incrementing the collided hash value with the result of some function P(x) applied to x (i.e. linear function P(x) = 4x), then applying modulo to get an index.
+	- x is initialized to 1, and is continuously incremented and the update process is repeated if collision occurs again, until an empty index is found.
+- Not all probing functions are viable, as they can result in Chaos Cycles shorter than the table size.
+- There are an infinite amount of probing sequences that could be used; however, the probing functions used with these methods are very specific to avoid Chaos Cycles.
 1. Linear Probing
 2. Quadratic Probing
+3. Double Hashing
+4. Pseudo Random Number Generator
 
-## Unfinished
-- Maps/Sets
-	- Hash Tables
-- Trees
-	- Binary Search Trees
-	- Tries (Prefix Trees)
-- Heaps/Priority Queues
-- Graphs
+
+##### Chaos Cycles
+- Infinite looping of cycle which are shorter than the actual table size N, and can be produced by poor probing functions.
+- Most randomly selected probing sequences modulo N will produce a cycle shorter than the table size.
+	- This method becomes problematic when trying to insert a key-value pair and all buckets on the cycle are occupied, resulting in an infinite loop.
+	- i.e. in a table of size 12 where the indexes 0, 4, and 8 are occupied and the probing function infinitely cycles between these filled indexes.
+- Note that Separate Chaining does not suffer from Chaos Cycles.
+- The general consensus is to rather than handling this issue, it is avoided altogether by restrictng the domain of probing functions to those which produce a cycle of exactly table size N.
+
+##### Linear Probing
+- A probing method which probes according to a linear formula.
+	- P(x) = ax + b, where a and b are constants, and a != 0;
+		- Note that the constant b is obsolete.
+- The values of the constant a and the table size N must be relatively prime to avoid Chaos Cycles.
+	- Two numbers are relatively prime if their Greatest Common Denominator (GCD) is equal to 1.
+	- If GCD(a, N) = 1, then the probing function P(x) can generate a complete cycle and an empty bucket can be found. 
+		i.e. for table size N = 9, P(x) = 2x will work since GCD(9, 2) = 1; however, P(x) = 6x will not work since GCD(9, 6) = 3.
+	- Therefore, P(x) = 1x where a = 1 is a common choice for a probing function, since GCD(1, N) = 1 regardless of table size N.
+	- Important to note that upon reaching the threshold determined by the load factor and the table size, the current table size must be doubled while maintaining the GCD(a, N) = 1 constraint.
+
+### Fenwick Trees/Binary Indexed Trees
+- A data structure that supports sum range queries as well as setting values (point updates) in a Static Array and getting the value of the prefix sum up some index efficiently.
+- **Implementaion**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/fenwicktree/FenwickTreeRangeUpdatePointQuery.java
+
+#### Fenwick Trees/Binary Indexed Trees Time Complexities
+| Operations     | Worst Case | 
+| -------------- | ---------- |
+| Construction   | O(n)       |
+| Point Update   | O(log(n))  |     
+| Range Sum      | O(log(n))  | 
+| Range Update   | O(log(n))  | 
+| Adding Index   | N/A        | 
+| Removing Index | N/A        | 
+
+#### Fenwick Tree Range Sum Queries
+- Unlike a regular Array, in a Fenwick Tree, each specific cell/index is responsible for a range of other cells as well, depending on the value of the least significant bit (LSB) in its binary representation.
+	- The position of the LSB determines the range of responsibility that cell has to the cells below itself.
+		i.e. for the number 40, the LSB is 1000 since its binary representation is 101000.
+	- i.e. index 12 in binary is 1100, where the LSBA is at position 3; therefore, this index is responsible for 2^(3-1) = 4 cells , including 3 below itself.
+	- i.e. index 11 in binary is 1011; therefore, responsible for 2^(1-1) = 1 cell (itself).
+		- Note that all odd indexes are responsible for 1 cell each (themselves).
+	- Range of responsibility increases exponentially by the power of 2 (doubles).
+- Note that Fenwick Trees are one-based, not zero-based. 
+- Compute the prefix sum up to a certain index, which ultimately allows the performance of range sum queries.
+	- Sum by cascading downwards from the current index by ranges of index responsibilities by continuously removing the LSB, eventually to binary representation of 0 or index 1.
+	- Obtaining the sum between a range that does not begin at index 1 requires calculating the difference between sums.
+		- The sum of range [x, y] = sum of range [1, y] - sum of range [1, x], where x, y > 1.
+- In the worst case, determining the sum between a range is logarithmic O(log(n)).
+	- i.e. sum of range [7, 5], which both have lots of ones in their binary representations.
+
+#### Fenwick Tree Point Updates
+- Add the LSB (instead of removing) to propagate the value to the cells responsible for the current index, until out-of-bounds is reached.
+	- i.e. updating the value at index 9 by some constant x requires adding the constant x to range of responsibilities of indexes 10, 12, and 16 as well.
+
+#### Fenwick Tree Construction
+- Given a Static Array of values, create a Fenwick Tree containing the appropriate prefix sums.
+	- Note that the Static Array containing values does not change.
+
+##### Naively Constructing in Linearithmic O(nlog(n)) Time
+- For each element in the array A of values at index i, perform a point update on the Fenwick Tree with a value of A[i].
+	- There are n elements and each point update takes logarithmic O(log(n)) time; thus, total of of linearithmic O(nlog(n)).
+
+##### Constructing in Linear O(n) Time
+- Cascading/propagating values throughout the Fenwick Tree by updating the parent index responsible for the current index in place.
+	- Add the value in the current cell to the immediate cell that is responsible. 
+		- Resembles point update cascading, but only one cell at a time.
+- The parent index is the current index plus the LSB of the current index.
+	- i.e. at index 4 with 0100 binary representation, the parent index is 8 with 1000 binary representation. Add the value at index 4 to the value at index 8.
+- A parent index that is out of bounds is simply ignored.
+
+### AVL Trees
+
+#### Balanced Binary Search Tree 
+- A self-balancing Binary Search Tree, which will adjust itself to maintain a low (logarithmic) height, allowing for faster operations such as insertions and deletions.
+	- Addresses issues of chains of nodes in normal Binary Search Trees (i.e. from a stream of increasing numbers as input), which results in linear O(n) in the worst case for all operations.
+	- Worst case becomes logarithmic O(log(n)) instead.
+- Leverages a tree invariant (rule or property imposed that must be met after evrey operation) and tree rotations.
+
+#### Balanced Binary Search Tree Time Complexities
+| Operations | Average Case | Worst Case |
+| ---------- | ------------ | ---------- |
+| Insert     | O(log(n))    | O(log(n))  |
+| Delete     | O(log(n))    | O(log(n))  |         
+| Remove     | O(log(n))    | O(log(n))  |        
+| Search     | O(log(n))    | O(log(n))  | 
+
+#### Tree Rotations
+- Applied after a tree operation to ensure that the tree invariant is met.
+
+### Graphs
+
 
 ## Algorithms
 - Traversal
