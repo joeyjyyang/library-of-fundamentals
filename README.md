@@ -559,33 +559,66 @@ Implementations of essential data structures and algorithms.
 - Applied after a tree operation to ensure that the tree invariant is met.
 
 ### Graphs
+- Networks consisting of nodes and edges, where the edge (u, v) goes from node u to node v.
 
+#### Graph Theory
+- Mathematical theory of the properties and applications of graphs (networks).
 
-## Algorithms
-- Traversal
-	- Depth First Search (DFS)
-	- Breadth First Search (BFS)
-- Sorting
-	- Quick Sort
-	- Merge Sort
-	- Bubble Sort
-	- Insertion Sort
-	- Selection Sort
-- Sliding Window Technique
-- Greedy Algorithms
+#### Types of Graphs
 
-## C++ STL Containers
-- Sequence Containers
-	- `std::array`
-	- `std::vector`
-	- `std::deque`
-	- `std::list`
-- Container Adaptors
-	- `std::stack`
-	- `std::queue`
-	- `std::priority_queue`
-- (Ordered and Unordered) Associative Containers
-	- `std::set`
-	- `std::unordered_set`
-	- `std::map`
-	- `std::unordered_map`
+##### Undirected Graphs
+- Graphs in which edges (paths) have no orientation and are bidirectional.
+	- The edge (u, v) is identical to the edge (v, u).
+	- i.e. nodes representing cities and edges representing two-way roads.
+
+##### Directed Graphs/Digraphs
+- Graphs in which edges have orientations and are unidirectional (represented with arrows).
+	- i.e. nodes representing people and edges representing giving presents.
+
+##### Weighted Graphs
+- Many graphs can have edges that contain a certain weight w to represent an arbitrary value, such as cost, distance, quantity, etc.
+	- Edge denoted by triplet (u, v, w).
+- Important to specify if the weighted graph is directed or undirected.
+
+##### Special Graphs
+1. Trees
+	- Undirected graphs with no cycles.
+	- Connected graphs with N nodes and N-1 edges.
+2. Rooted Trees
+	- Trees with designated root nodes where every edge either points away from or towards the root node.
+3. Directed Acyclic Graphs (DAGs)
+	- Directed graphs with no cycles.
+	- Used to represent structures with dependencies.
+		- i.e. schedulers, compilers, university class prerequisites, etc.
+	- Useful algorithms include finding the shortest path(s), and producing a topological ordering of nodes.
+4. Bipartite Graphs
+	- Graphs whose vertices can be split into two independent groups U and V, such that every edge connects between U and V.
+	- Play a critical role in Network Flow.
+5. Complete Graphs
+	- There is a unique edge between every pair of nodes.
+	- Useful for testing an algorithm for performance.
+
+#### Representing Graphs
+- Important to carefully select the data structure to represent the type of graph.
+This ultimately has a huge impact on performance.
+
+##### Adjacency Matrices
+- The simplest way of representing a graph in a 2D matrix.
+- Given an adjacency matrix m, the cell m[i][j] represents the edge weight of going from node i to node j.
+	- Often assumed that the edge of going from a node to itself has a cost of 0; thus, the diagonal of the adjacency matrix is all zeros.
+- Space efficient for dense graphs, and also provides edge weight lookup of constant O(1) time.
+- Typically not the first choice since it requires V^2 space, and requires V^2 time to iterate over all edges, which is especially inefficient for sparse graphs where there are many empty cells.
+
+##### Adjacency Lists
+- Represent a graph as a map from nodes to their corresponding list of edges.
+	- Each node tracks its own list of outgoing edges and weights.
+		i.e. node C can reach node A and node B is represented by C -> [(A, 4), (B, 1)].
+- Adjacency lists only need to keep track of the end nodes and their corresponding weights, since the start nodes are already implicitly known.
+- The main alternative to adjacency matrices, since adjacency lists are space efficient in space for representing sparse graphs, and can iterate over all edges in efficient time.
+- Slightly more complex to implement as a graph representation, and are less space efficient for dense graphs.
+
+##### Edge Lists
+- Simply represent a graph as an unordered list of edges (and weights).
+	- The list contains triplets (u, v, w), which represent the cost w from node u to node v.
+	- i.e. [(C, A, 4), (A, C, 1), (B, C, 6)]
+- Rarely used due to the lack of structure; however, edge lists are conceptually simply and practical in a handful of algorithms.
