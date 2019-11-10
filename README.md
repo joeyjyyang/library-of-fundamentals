@@ -66,9 +66,9 @@ Implementations of essential data structures and algorithms.
 - **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/dynamicarray/DynamicArray.java
 
 #### Array Time Complexities
-| Operations | Static Arrays | Dynamic Arrays |
-|            | Worst Case    | Worst Case     |
+|            | Static Arrays | Dynamic Arrays |
 | ---------- | ------------- | -------------- |
+| Operations | Worst Case    | Worst Case     |
 | Access     | O(1)          | O(1)           |
 | Search     | O(n)          | O(n)           |
 | Insertion  | N/A           | O(n)           |
@@ -101,9 +101,9 @@ Implementations of essential data structures and algorithms.
 - **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/linkedlist/DoublyLinkedList.java
 
 #### Linked Lists (Worst Case) Time Complexities
-| Operations       | Singly Linked Lists | Doubly Linked Lists |
-|                  | Worst Case          | Worst Case          |
+|                  | Singly Linked Lists | Doubly Linked Lists |
 | ---------------- | ------------------- | ------------------- |
+| Operations       | Worst Case          | Worst Case          |
 | Search           | O(n)                | O(n)                |
 | Insert at Head   | O(1)                | O(1)                |
 | Insert at Tail   | O(1)                | O(1)                |
