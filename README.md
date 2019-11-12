@@ -560,6 +560,10 @@ Implementations of essential data structures and algorithms.
 
 ### Graphs
 - Networks consisting of nodes and edges, where the edge (u, v) goes from node u to node v.
+- Directed or undirected? 
+- Weight or unweighted edges?
+- Likely to be sparse or dense with edges?
+- Use adjacency matrices, adjacency lists, edge lists, or other structure to represent efficiently?
 
 #### Graph Theory
 - Mathematical theory of the properties and applications of graphs (networks).
@@ -622,3 +626,63 @@ This ultimately has a huge impact on performance.
 	- The list contains triplets (u, v, w), which represent the cost w from node u to node v.
 	- i.e. [(C, A, 4), (A, C, 1), (B, C, 6)]
 - Rarely used due to the lack of structure; however, edge lists are conceptually simply and practical in a handful of algorithms.
+
+#### Common Graph Theory Problems
+
+##### Shortest Path 
+- Given a weighted graph, find the shortest path (minimum total weight/cost) of edges from node A to node B.
+- Typical solution algorithms include Breadth-First Search (for unweighted graph), Dijkstra's, Bellman-Ford, A* (A star), etc.
+
+##### Connectivity
+- Does there exist a path between node A and node B?
+- Typical solution algorithms include using Union Find or any search algorithm (i.e. DFS, BFS, etc.).
+
+##### Negative Cyclces
+- Detecting negative cycles in a weighted graph.
+	- Negative cycles can have pros and cons in the given context.
+- Typical solution algorithms include Bellman-Ford and Floyd-Warshall.
+
+##### Strongly Connected Components
+- Finding self-contained cycles within a directed graph, where every vertex (node) in a given cycle can reach every other vertex in the same cycle.
+	- Usually an intermediate step for other problems.
+- Typical solution algorithms include Tarjan's and Kosaraju's.
+
+##### Travelling Salesman 
+- Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city?
+- This is an NP-Hard problem, meaning it's very computationally challenging; unfortunately, this problem also has several important applications.
+- Typical solution algorithms include Held-Karp (dynamica programming), Branch and Bound, and many other approximation algorithms.
+
+##### Minimum Spanning Tree (MST)
+- A subset of edges (tree) of a connected, edge-weighted graph that connects all the vertices together, without any cucles and with the minimum total edge weight.
+- Used to design a least cost network, circuit design, transportation networks, etc.
+- Typical solution algorithms include Kruskal's, Prim's, Boruvka's, etc.
+
+##### Finding Max Flow from Network Flow Graph
+- With an infinite input source, how much flow can be pushed through the network?
+- Edges weights represent capacities of the system.
+	- i.e. max volume through a pipe, max number of cars on a road, etc.
+- Typical solution algorithms include Ford-Fulkerson, Edmonds-Karp, Dinic's, etc.
+
+#### Graph Algorithms
+
+##### Depth-First Search (DFS)
+- Most fundamental traversal/search algorithm used to explore nodes and edges of a graph. 
+- Plunges depth first into a graph without regard for which edge it takes next until it cannot go any further, at which point it backtracks and continues.
+	- i.e. starts at node 0 and continuously searches deeper and subsequently backtracking until all nodes are visited and the algorithm returns back to node 0.
+- Visited nodes are marked; already visited nodes do not need to be further traversed.
+- Runs with a time complexity of O(V+E), where V is the number of vertices (nodes), and E is the number of edges.	- Proportional to size of graph.
+- Very powerful when augmented to perform other tasks such as count connected components, determine connectivity, find bridges/articulation points, detect and find cycles, topologically sort the nodes, generate mazes, etc.
+- Convenient to use adjacency lists.
+- **Implementation**: https://github.com/williamfiset/Algorithms/blob/master/com/williamfiset/algorithms/graphtheory/DepthFirstSearchAdjacencyListRecursive.java
+
+###### Determining Connected Components
+- Marking all nodes connected/reachable by a node as part of the same component (group).
+	- i.e. assign integer value to each group to distinguish.
+
+##### Breadth-First Search (BFS)
+
+
+
+
+
+
