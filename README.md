@@ -460,7 +460,7 @@ Implementations of essential data structures and algorithms.
 	- A poor decision can result in Chaos Cycles.
 
 ##### Probing Sequences
-- General concept of incrementing the collided hash value with the result of some function P(x) applied to x (i.e. linear function P(x) = 4x), then applying modulo to get an index.
+- General concept of incrementing the collided hash value with the result of some function P(x) applied to x (i.e. linear function P(x) = 4x), then applying mod to get an index.
 	- x is initialized to 1, and is continuously incremented and the update process is repeated if collision occurs again, until an empty index is found.
 - Not all probing functions are viable, as they can result in Chaos Cycles shorter than the table size.
 - There are an infinite amount of probing sequences that could be used; however, the probing functions used with these methods are very specific to avoid Chaos Cycles.
@@ -472,7 +472,7 @@ Implementations of essential data structures and algorithms.
 
 ##### Chaos Cycles
 - Infinite looping of cycle which are shorter than the actual table size N, and can be produced by poor probing functions.
-- Most randomly selected probing sequences modulo N will produce a cycle shorter than the table size.
+- Most randomly selected probing sequences mod N will produce a cycle shorter than the table size.
 	- This method becomes problematic when trying to insert a key-value pair and all buckets on the cycle are occupied, resulting in an infinite loop.
 	- i.e. in a table of size 12 where the indexes 0, 4, and 8 are occupied and the probing function infinitely cycles between these filled indexes.
 - Note that Separate Chaining does not suffer from Chaos Cycles.
@@ -480,7 +480,7 @@ Implementations of essential data structures and algorithms.
 
 ##### Linear Probing
 - A probing method which probes according to a linear formula.
-	- P(x) = ax + b, where a and b are constants, and a != 0;
+	- P(x) = ax + b, where a and b are constants, and a != 0.
 		- Note that the constant b is obsolete.
 - The values of the constant a and the table size N must be relatively prime to avoid Chaos Cycles.
 	- Two numbers are relatively prime if their Greatest Common Denominator (GCD) is equal to 1.
@@ -489,9 +489,40 @@ Implementations of essential data structures and algorithms.
 	- Therefore, P(x) = 1x where a = 1 is a common choice for a probing function, since GCD(1, N) = 1 regardless of table size N.
 	- Important to note that upon reaching the threshold determined by the load factor and the table size, the current table size must be doubled while maintaining the GCD(a, N) = 1 constraint.
 
+##### Quadratic Probing
+- A probing method which probes according to a quadratic formula.
+	- P(x) = ax^2 + bx + c, and a != 0.
+		- Note that the constant b is obsolete.
+- Unlike linear probing which produce cycles of order N, where N is the table size, some quadratic probing functions produce a cycle of N/2, but are always able to find a free slot if the load factor is less than 1/2.
+- Note that most randomly selected quadratic probing functions will cause Chaos Cycles.
+	- They easily produce short cycles.
+- Feasible quadratic probing functions are very specific, and depend on the function itself, the table size, the max load factor, and the table threshold (before resizing).
+	- i.e. P(x) = (x^2 + x)/2 and keep the table size N a power of two.
+		- i.e. N = 2^3 = 8, max load factor = 0.4, and table threshold = N * max load factor = 3.
+
+##### Double Hashing
+- A probing method which probes according to a constant multiple of another hash function.
+	- P(k, x) = x * H2(k), where H2(k) is a second hash function.
+	- Note that double hashing reduces to linear probing, except that the constant is unknown until runtime.
+		- There may be cycles produced.
+- To fix the issue of Chaos Cycles, pick the table size N to be a prime number and also compute the value of delta.
+	- delta = H2(k) mod N.
+	- Array index = H1(k) + x * delta mod N = H1(k) + x * H2(k) mod N mod N = H1(k) + P(k, x) mod N mod N?
+	- Note that H2(k) must hash the same type of keys as H1(k).
+	- In the case where delta = 0 (< 1), a cycle is guaranteed to occur; thus, set delta = 1.
+- Upon resizing, compute 2N and find the next prime number above this value.
+
+###### Constructing the Secondary Hash Function H2(k)
+- Frequently, the hash functions selected to compose H2(k) are picked from a pool of universal hash functions which generally operate on one fundamental data type.
+
+#### Open Addressing vs. Separate Chaining
+- Open addressing hash functions are often more specialized and are of higher quality compared to those used in separate chaining.
+- The load factor for open addressing is typically much lower.
+- In open addressing, key-value pairs are stored in the table itself. In separate chaining, the key-value pairs are stored in an auxiliary data structure (i.e. linked list).
+
 ### Fenwick Trees/Binary Indexed Trees
 - A data structure that supports sum range queries as well as setting values (point updates) in a Static Array and getting the value of the prefix sum up some index efficiently.
-- **Implementaion**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/fenwicktree/FenwickTreeRangeUpdatePointQuery.java
+- **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/fenwicktree/FenwickTreeRangeUpdatePointQuery.java
 
 #### Fenwick Trees/Binary Indexed Trees Time Complexities
 | Operations     | Worst Case | 
@@ -666,14 +697,28 @@ This ultimately has a huge impact on performance.
 #### Graph Algorithms
 
 ##### Depth-First Search (DFS)
-- Most fundamental traversal/search algorithm used to explore nodes and edges of a graph. 
+- A fundamental traversal/search algorithm used to explore nodes and edges of a graph. 
 - Plunges depth first into a graph without regard for which edge it takes next until it cannot go any further, at which point it backtracks and continues.
 	- i.e. starts at node 0 and continuously searches deeper and subsequently backtracking until all nodes are visited and the algorithm returns back to node 0.
 - Visited nodes are marked; already visited nodes do not need to be further traversed.
-- Runs with a time complexity of O(V+E), where V is the number of vertices (nodes), and E is the number of edges.	- Proportional to size of graph.
+- Runs with a time complexity of O(V+E), where V is the number of vertices (nodes), and E is the number of edges.	
+	- Proportional to size of graph.
+- Often used as a building block in other algorithms.
 - Very powerful when augmented to perform other tasks such as count connected components, determine connectivity, find bridges/articulation points, detect and find cycles, topologically sort the nodes, generate mazes, etc.
 - Convenient to use adjacency lists.
 - **Implementation**: https://github.com/williamfiset/Algorithms/blob/master/com/williamfiset/algorithms/graphtheory/DepthFirstSearchAdjacencyListRecursive.java
+
+##### Breadth-First Search (BFS)
+- A fundamental traversal/search algorithm used to explore nodes and edges of a graph. 
+- Runs with a time complexity of O(V+E), where V is the number of vertices (nodes), and E is the number of edges.	
+	- Proportional to size of graph.
+- Often used as a building block in other algorithms.
+- Starts at some arbitrary node of a graph and explores the neighbour nodes first, before moving to the next level of neighbours.
+	- BFS explores nodes in "layers" by maintaining a Queue of which nodes to visit next.
+		- At the beginning, the start node is added to the queue, marked as visited (i.e. in a list), popped from the Queue, and has its neighbour nodes added to the queue (if unvisited).
+	- The algorithm ends when the Queue is empty; in other words, all nodes have been visited.
+- Particularly useful for finding the shortest path on unweighted graphs.
+- **Implementation**: https://github.com/williamfiset/Algorithms/blob/master/com/williamfiset/algorithms/graphtheory/BreadthFirstSearchAdjacencyListIterative.java
 
 ###### Determining Connected Components
 - Marking all nodes connected/reachable by a node as part of the same component (group).
