@@ -394,6 +394,8 @@ Implementations of essential data structures and algorithms.
 - Often used to track item frequencies.
 	- i.e. Counting the number of times a word appears in a given text.
 - Provides very fast insertion, lookup, and removal time for data of constant O(1) time (in average case) by using a hash function as a way to index into the hash table.
+- Neither key nor value elements of a key-value pair can be null.
+- **Implementation**: https://github.com/williamfiset/data-structures/blob/master/com/williamfiset/datastructures/hashtable/HashTableQuadraticProbing.java
 
 #### What is a Hash Function?
 - A function that maps a key x to a whole number in a fixed range.
@@ -461,7 +463,8 @@ Implementations of essential data structures and algorithms.
 
 ##### Probing Sequences
 - General concept of incrementing the collided hash value with the result of some function P(x) applied to x (i.e. linear function P(x) = 4x), then applying mod to get an index.
-	- x is initialized to 1, and is continuously incremented and the update process is repeated if collision occurs again, until an empty index is found.
+	- Hash (array) index = H(k) + P(x) mod N, where H(k) is the hash value produced by the hash function, P(x) is the probing function, and N is the table size.
+		- x is initialized to 1, and is continuously incremented and the update process is repeated if collision occurs again, until an empty index is found.
 - Not all probing functions are viable, as they can result in Chaos Cycles shorter than the table size.
 - There are an infinite amount of probing sequences that could be used; however, the probing functions used with these methods are very specific to avoid Chaos Cycles.
 1. Linear Probing
@@ -519,6 +522,20 @@ Implementations of essential data structures and algorithms.
 - Open addressing hash functions are often more specialized and are of higher quality compared to those used in separate chaining.
 - The load factor for open addressing is typically much lower.
 - In open addressing, key-value pairs are stored in the table itself. In separate chaining, the key-value pairs are stored in an auxiliary data structure (i.e. linked list).
+
+#### Removing Key-Value Pairs from Hash Tables
+
+##### Naively Removing Key-Value Pairs with Open Addressing
+- In the case where there are several collisions, naively removing an element will leave a null reference in the array. For subsequent searches for the other elements which collide with this removed index, the algorithm will determine that those elements also do not exist within the hash table, since null was encountered.
+
+##### Removing/Replacing Key-Value Pairs with Open Addressing using Tombstones.
+- Solution to naive method is to place a unique marker called a tombstone instead of a null to indicate that a key-value pair has been deleted, and that bucket should be skipped during a search.
+- Tombstones increase the load factor, and will be removed when the table is resized.
+- Tombstone buckets can also be replaced with new key-value pairs upon insertion.
+
+###### Lazy Deletion
+- An optimization by removing the earliest tombstone encountered with the key-value pair that was looked up and eventually found.
+	- This method prevents inefficient additional probing in a Hash Table cluttered with tombstones.
 
 ### Fenwick Trees/Binary Indexed Trees
 - A data structure that supports sum range queries as well as setting values (point updates) in a Static Array and getting the value of the prefix sum up some index efficiently.
@@ -724,9 +741,36 @@ This ultimately has a huge impact on performance.
 - Marking all nodes connected/reachable by a node as part of the same component (group).
 	- i.e. assign integer value to each group to distinguish.
 
-##### Breadth-First Search (BFS)
+###### Find Shortest Path on a Grid using Breadth-First Search
+- Many problems in graph theory can be represented using a grid.
+	- Grids are a form of implicit graph because we can determine a node's neighbours based on our location witin the grid.
+	- i.e. solving a maze, routing through obstacles to get to a location, shortest path through a dungeon, etc.
+- Common approach to solving graph theory problems on grids is to first convert the grid to a familiar format such as an adjacency list or an adjacency matrix.
+	- However, this may not always be the most efficient method.
+- Transformations between graph representations (i.e. adjacency lists, adjacency matrices, etc.) can usually be avoided due to the structure of a grid by using direction vectors instead.
+	- By simply indexing +/- 1 to the object's current row-column (i.e. x and y) position in the grid, we can move the object left, right, up, down and/or diagonally to easily access its neighbouring cells.
+		- This method is easy to implement and can be scaled to higher dimensions.
+- Typically for the BFS method, a Queue is used to maintain tracking and visiting of neighbouring nodes, and an Array is used to keep track of already visited nodes, so that redundant neighbour nodes are not added to the Queue and revisited.
+	- Starting at the initial cell/node, current nodes are continuously popped while neighbouring nodes are subsequently pushed until the end goal has been reached.
+	- Obstacles (i.e. marked by some character symbol) will prevent some neighbouring cells from being reached directly.
+	- BFS algorithm can stop before all cells/nodes are visited, as long as the end has been reached.
+	- The smallest number of steps it takes to go from start to end is equal to the number of times, or "layers", the neighbouring nodes of all current nodes popped from the queue are pushed (i.e. number of while loop iterations).
+	- To obtain the actual shortest path itself, the previously visited node of each node must be tracked (i.e. in a 2D matrix) to retrace the path taken to achieve the smallest number of steps.
+	- This method requires a lot of packing and unpacking of values accessed through the Queue, since each Queue element stores the next x and y position as a pair.
+		- Requires an array or an object wrapper to store the coordinate values.
+- An alternative method of representing multi-dimensional coordinates which requires less setup and effort is to use multiple Queues. 
+	- One Queue for each dimensions.
+		- i.e. in 3D, there will be three Queues (for x, y, and z dimensions).
 
-
+#### Dijkstra's Shortest Path Algorithm
+- Able to determine the shortest paths between the starting node and all other nodes throughout the entire graph.
+- One of the most important algorithms for finding the shortest path in a graph.
+- It is a Single Source Shortest Path (SSSP) algorithm for graphs with non-negative edge weights.
+	- The initial node must be explicitly specified at the beginning of the algorithm to indicate a relative starting point.
+- Depending on how the algorithm is implemented and which data structures are used, the time complexity is typically O(E * log(V)), where E and V represent the number of edges (paths) and vertices (nodes) respectively.
+- The main constraint for Dijkstra's Algorithm is that the graph must only contain non-negative edge weights. 
+	- This is imposed to ensure that once a node has been visited, its optimal distance cannot be improved.
+	- Ultimately, this constraint enables the algorithm to act in a greedy manner by always selecting the next most promising node.
 
 
 
