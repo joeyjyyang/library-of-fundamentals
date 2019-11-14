@@ -772,6 +772,50 @@ This ultimately has a huge impact on performance.
 	- This is imposed to ensure that once a node has been visited, its optimal distance cannot be improved.
 	- Ultimately, this constraint enables the algorithm to act in a greedy manner by always selecting the next most promising node.
 
+##### Dijkstra's Algorithm Overview 
+- A dist Array, a minimum Priority Queue, and a visited Array are typically used.
+	- A dist Array, where the distance to every node (from the starting node) is positive infinity. At the starting node's index, mark the distance as 0.
+	- Maintain a minimum Priority Queue (implemented as a Min Binary Heap in the lazy approach) of key-value pairs (node index, distance) to indicate which node to visit next, based on sorted min value of distance from the starting node.
+	- The visited Array will also be updated in parallel to mark already visited nodes prevent them from being revisited as neighbouring nodes to the current node.
+1. Initially, insert (s, 0) into the Priority Queue, and loop while the Priority Queue is not empty, keep pulling out the next most promising pair (node index, distance) pair.
+	- Node s will be visited first, since it has the best distance in the Priority Queue, and is also the only node in the Priority Queue initially.
+2. For each node visited, iterate over all edges outwards from the current node and relax each edge, appending a new (node index, distance) key-value pair to the Priority Queue for every relaxation.
+	- The currently visited node's neighbouring nodes will be added to the Priority Queue, and if the distance from the starting node (value at the neighbouring node's index in the dist Array) plus the edge's cost is less than the current stored value in the dist Array (initially positive infinity), update the value with the neighbouring node's new shortest distance.
+	- In the lazy approach, a new key-value pair must be inserted (takes logarithmic O(log(n)) time) if the neighbouring node's distance is updated with a shorter distance.
+		- Note that this insertion operation is much faster than the linear O(n) time it takes to search for the key in the Priority Queue and subsequently update the distance value.
+		- Downside is that duplicate key-value pairs may be inserted.
+		- This method can be optimized into an eager approach using an Indexed Priority Queue (implemented as an Indexed Binary Heap), which provides constant O(1) time access to key-value pairs for update.
+	- The current node is then deqeued/removed from the Priority Queue, and the next neighbouring node to visit is selected based on the minimum distance.
+		- Outdated and non-optimal key-value pairs of node index and distance from the starting node are lazily deleted from the Priority Queue once selected, since they have the minimum distance amongst all elements currently in the Priority Queue; however, the corresponding node already has a shorter distance in the dist Array.
+		- The solution is to simply check if the stored minimum distance in the dist Array is less than the distance of the key-value pair pulled from the Priority Queue; if true, the key-value pair can be ignored and removed, since we know that we already have a shorter path for that node.
+- Once the Priority Queue is empty, the shortest distance to each node from the starting node will be stored in the dist Array.
 
+##### Finding the Optimal Path
+- If interested in finding not only the optimal distance to a particular starting node, but also what sequence of nodes were taken to get there, additional info must be stored using a prev Array.
+	- The prev Array tracks the index of the node previously taken to reach the current node i.
+	- Initially should be initialized with null values.
+- At the end of the algorithm, the prev Array will contain the previous nodes taken along the shortest path to reach all nodes.
+- Note that the prev Array must be reversed at the end to obtain the shortest path.
 
+##### Stopping Early
+- Once the destination node has been reached, every other node in the graph/network will be visited only in the worst case.
+- The main idea for stopping early is that Dijkstra's Algorithm processes each next most promising node in order, so if the destination node has been visited, its shortest distance will not change as more future nodes are visited.
+- In implementation, after finishing visiting the current node's neighbours, simply check if the current node index is equal to the destination node; if true, stop the algorithm.
 
+##### Lazy Dijkstra's Algorithm
+- The approach of inserting duplicate key-value pairs in the Priority Queue in logarithmic O(log(n)) time, rather than searching for the key to update the value in linear O(n) time, is inefficient for dense graphs, since there will be several outdated key-value pairs in the Priority Queue.
+
+##### Eager Dijkstra's Algorithm using an Indexed Priority Queue
+- Avoids duplicate key-value pairs and supports efficient value updates in logarithmic O(log(n)) time by using an Indexed Priority Queue (implemented using an Indexed Binary Heap).
+- An Indexed Priority Queue is a Priority Queue variant which allows access to key-value pairs in constant O(1) time (as opposed to the linear O(n) access time in normal Priority Queues) and updates in logarithmic O(log(n)) time if using a Binary Heap.
+- Upon discovering a shorter path for a node, access then update the key-value pair in the Indexed Priority Queue, instead of inserting a new key-value pair.
+
+##### D-ary Heap Optimization
+- In Dijkstra's Algorithm, there are typically a lot more update operations (i.e. decrease key) to key-value pairs than there are dequeue removal operations.
+- The D-ary Heap is a Heap variant in which each node has D children. 
+	- Speeds up decrease key operations at the expense of more costly removals.
+- In general, D = E / V is the best degree to use to balance removals against decrease key operations and optize Dijkstra's Algorithm, improving the time complexity to O(E * log(V)), which is especially better for dense graphs.
+
+##### Fibonacci Heap
+- The current state-of-the-art Heap, which gives Dijkstra's Algorithm a time complexity of O(E+ Vlog(V)).
+- In practice, Fibonacci Heaps are very difficult to implement and have a large enough constant amortized overhead to make them impractical, unless the graph is extremely large.
