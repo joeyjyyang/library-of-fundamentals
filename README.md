@@ -606,6 +606,10 @@ Implementations of essential data structures and algorithms.
 #### Tree Rotations
 - Applied after a tree operation to ensure that the tree invariant is met.
 
+### Indexed Priority Queues
+
+#### Indexed D-ary Heaps
+
 ### Graphs
 - Networks consisting of nodes and edges, where the edge (u, v) goes from node u to node v.
 - Directed or undirected? 
@@ -773,9 +777,9 @@ This ultimately has a huge impact on performance.
 	- Ultimately, this constraint enables the algorithm to act in a greedy manner by always selecting the next most promising node.
 
 ##### Dijkstra's Algorithm Overview 
-- A dist Array, a minimum Priority Queue, and a visited Array are typically used.
+- A dist Array, a Min  Priority Queue (implemented as a Min Binary Heap in the lazy approach, or as an Min Indexed D-ary Heap in the eager approach), and a visited Array are typically used.
 	- A dist Array, where the distance to every node (from the starting node) is positive infinity. At the starting node's index, mark the distance as 0.
-	- Maintain a minimum Priority Queue (implemented as a Min Binary Heap in the lazy approach) of key-value pairs (node index, distance) to indicate which node to visit next, based on sorted min value of distance from the starting node.
+	- Maintain a Min Priority Queue  of key-value pairs (node index, distance) to indicate which node to visit next, based on sorted min value of distance from the starting node.
 	- The visited Array will also be updated in parallel to mark already visited nodes prevent them from being revisited as neighbouring nodes to the current node.
 1. Initially, insert (s, 0) into the Priority Queue, and loop while the Priority Queue is not empty, keep pulling out the next most promising pair (node index, distance) pair.
 	- Node s will be visited first, since it has the best distance in the Priority Queue, and is also the only node in the Priority Queue initially.
@@ -803,7 +807,7 @@ This ultimately has a huge impact on performance.
 - In implementation, after finishing visiting the current node's neighbours, simply check if the current node index is equal to the destination node; if true, stop the algorithm.
 
 ##### Lazy Dijkstra's Algorithm
-- The approach of inserting duplicate key-value pairs in the Priority Queue in logarithmic O(log(n)) time, rather than searching for the key to update the value in linear O(n) time, is inefficient for dense graphs, since there will be several outdated key-value pairs in the Priority Queue.
+- The approach of inserting duplicate key-value pairs in the Min Priority Queue (Min Binary Heap) in logarithmic O(log(n)) time, rather than searching for the key to update the value in linear O(n) time, is inefficient for dense graphs, since there will be several outdated key-value pairs in the Priority Queue.
 
 ##### Eager Dijkstra's Algorithm using an Indexed Priority Queue
 - Avoids duplicate key-value pairs and supports efficient value updates in logarithmic O(log(n)) time by using an Indexed Priority Queue (implemented using an Indexed Binary Heap).
@@ -813,7 +817,7 @@ This ultimately has a huge impact on performance.
 
 ##### D-ary Heap Optimization
 - In Dijkstra's Algorithm, there are typically a lot more update operations (i.e. decrease key) to key-value pairs than there are dequeue removal operations.
-- The D-ary Heap is a Heap variant in which each node has D children. 
+- The Min Indexed D-ary Heap is a Heap variant in which each node has D children. 
 	- Speeds up decrease key operations at the expense of more costly removals.
 - In general, D = E / V is the best degree to use to balance removals against decrease key operations and optize Dijkstra's Algorithm, improving the time complexity to O(E * log(V)), which is especially better for dense graphs.
 
