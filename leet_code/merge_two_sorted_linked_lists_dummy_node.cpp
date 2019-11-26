@@ -2,7 +2,7 @@
  * Author: Joey Yang
  * Email: joeyyang.ai@gmail.com	
  * Runtime: 8 ms - Beats 77.98% of submissions
- * Memory: 8.9 MB - Beats 82.79% of submissions
+ * Memory: 8.7 MB - Beats 100.00% of submissions
  */
 
 /**
@@ -13,14 +13,15 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if (l1 == NULL) return l2;
-        if (l2 == NULL) return l1;
+        if (l1 == nullptr) return l2;
+        if (l2 == nullptr) return l1;
         ListNode* dummy = new ListNode(0);
-        ListNode* current = dummy;
-        while (l1 != NULL && l2 != NULL)
+        ListNode* current{dummy};
+        while (l1 != nullptr && l2 != nullptr)
         {
             if (l1->val <= l2->val)
             {
@@ -34,8 +35,10 @@ public:
             }
             current = current->next;
         }
-        if (l1 != NULL) current->next = l1;
-        if (l2 != NULL) current->next = l2;
-        return dummy->next;
+        if (l1 != nullptr) current->next = l1;
+        if (l2 != nullptr) current->next = l2;
+        ListNode* head = dummy->next;
+        delete dummy;
+        return head;
     }
 };
