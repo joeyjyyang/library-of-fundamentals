@@ -37,8 +37,8 @@ class Graph {
  public:
   Graph() {}
   using EdgeList = unordered_map<NodeId, EdgeData>;
-  EdgeList edgesFor(NodeId id) const;
-  EdgeData* findEdge(NodeId from, NodeId to);
+  EdgeList edgesFor(NodeId id) const; //returns EdgeList (value) associated with input Node (key) from graph_ (unordered map)
+  EdgeData* findEdge(NodeId from, NodeId to); //if to Node exists in the EdgeList of from Node, return associated EdgeData
   void addBidirectionalEdge(NodeId from, NodeId to, EdgeWeight weight = 1.0);
   void addEdge(NodeId from, NodeId to, EdgeWeight weight = 1.0);
 
@@ -86,17 +86,17 @@ Graph::EdgeList Graph::edgesFor(NodeId id) const {
 }
 
 EdgeData* Graph::findEdge(NodeId from, NodeId to) {
-  auto edge_list_iter = graph_.find(from);
+  auto edge_list_iter = graph_.find(from); //check if from Node (key) exists in graph_ (unordered map)
   if (edge_list_iter == graph_.end()) {
     return nullptr;
   }
 
-  auto& edge_list = edge_list_iter->second;
-  auto edge_iter = edge_list.find(to);
+  auto& edge_list = edge_list_iter->second; //get reference to EdgeList (value) associated with from Node (key) from graph_ (unordered map)
+  auto edge_iter = edge_list.find(to); //check if to Node (key) exists in EdgeList (unordered map)
 
   return (edge_iter == edge_list.end()) ?
       nullptr:
-      &edge_iter->second;
+      &edge_iter->second; //return EdgeData (value) associated with to Node (key) from EdgeList (unordered map)
 }
 
 void Graph::addBidirectionalEdge(NodeId from, NodeId to, EdgeWeight weight) {
