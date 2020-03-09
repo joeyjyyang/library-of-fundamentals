@@ -808,12 +808,12 @@ This ultimately has a huge impact on performance.
 
 ##### Lazy Dijkstra's Algorithm
 - The approach of inserting duplicate key-value pairs in the Min Priority Queue (Min Binary Heap) in logarithmic O(log(n)) time, rather than searching for the key to update the value in linear O(n) time, is inefficient for dense graphs, since there will be several outdated key-value pairs in the Priority Queue.
+- **Implementation**: https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/williamfiset/algorithms/graphtheory/DijkstrasShortestPathAdjacencyList.java
 
 ##### Eager Dijkstra's Algorithm using an Indexed Priority Queue
 - Avoids duplicate key-value pairs and supports efficient value updates in logarithmic O(log(n)) time by using an Indexed Priority Queue (implemented using an Indexed Binary Heap).
 - An Indexed Priority Queue is a Priority Queue variant which allows access to key-value pairs in constant O(1) time (as opposed to the linear O(n) access time in normal Priority Queues) and updates in logarithmic O(log(n)) time if using a Binary Heap.
 - Upon discovering a shorter path for a node, access then update the key-value pair in the Indexed Priority Queue, instead of inserting a new key-value pair.
-- **Implementation**: https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/williamfiset/algorithms/graphtheory/DijkstrasShortestPathAdjacencyList.java
 
 ##### D-ary Heap Optimization
 - In Dijkstra's Algorithm, there are typically a lot more update operations (i.e. decrease key) to key-value pairs than there are dequeue removal operations.
