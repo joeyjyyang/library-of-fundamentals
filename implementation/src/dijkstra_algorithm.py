@@ -92,15 +92,20 @@ class Network:
 		return self.link
 
 	def printLinkCosts(self):
+		print('---- Minimum Link Costs ----')
+		print('| Destination |', '| Minimum Link Cost |')
 		for self.router, self.distance in self.link_costs.items():
 			print(self.router, self.distance)
 
-	def printPreviousRouters(self):
+	def printPreviousRouter(self):
+		print('---- Previous Router ----')
+		print('| Destination |', '| Previous Router |')
 		for self.router, self.previous_router in self.previous_routers.items():
 			print(self.router, self.previous_router)
 
 	def printRoutingTable(self):
-		print('Destination', 'Link')
+		print('---- Routing Table ----')
+		print('| Destination |', '| Link |')
 		for self.destination, self.link in self.routing_table.items():
 			print(self.destination, self.link)
 
@@ -108,8 +113,8 @@ def main():
 	network = Network()
 	network.dijkstraAlgorithm()
 	network.printRoutingTable()
-	#network.printLinkCosts()
-	#network.printPreviousRouters()
+	network.printLinkCosts()
+	#network.printPreviousRouter()
 
 if __name__ == "__main__":
 	main()
