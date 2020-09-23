@@ -849,7 +849,7 @@ https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/william
 
 ## Dynamic Programming (Optimization)
 
-## Tabulation
+### Tabulation
 - Bottom-up.
 
 ### Memoization (Recursion)
