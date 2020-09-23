@@ -1,6 +1,8 @@
 # library-of-fundamentals
 Implementations of essential data structures and algorithms.
 
+# Data Structures
+
 ## Background
 
 ### What is a Data Structure?
@@ -826,3 +828,29 @@ https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/william
 ##### Fibonacci Heap
 - The current state-of-the-art Heap, which gives Dijkstra's Algorithm a time complexity of O(E+ Vlog(V)).
 - In practice, Fibonacci Heaps are very difficult to implement and have a large enough constant amortized overhead to make them impractical, unless the graph is extremely large.
+
+# Algorithms
+
+## Sorting 
+
+## Searching
+
+## Greedy 
+
+## Sliding Window
+
+## Brute Force
+
+### Iteration
+
+### Recursion
+
+## Divide and Conquer
+
+## Dynamic Programming (Optimization)
+
+## Tabulation
+- Bottom-up.
+
+### Memoization (Recursion)
+- Top-down.
