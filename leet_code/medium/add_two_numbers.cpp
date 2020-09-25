@@ -3,6 +3,9 @@
  * Email: joeyyang.ai@gmail.com	
  * Runtime: 24 ms - Beats 95.55% of submissions
  * Memory: 71.3 MB - Beats 9.56% of submissions
+ * Data Structures: Linked Lists
+ * Algorithms: 
+ * Other: Modulo, Carry
  */
 
 /**
@@ -15,6 +18,7 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {

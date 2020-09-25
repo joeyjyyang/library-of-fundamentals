@@ -3,6 +3,9 @@
  * Email: joeyyang.ai@gmail.com
  * Runtime: 4 ms - Beats 58.85% of submissions
  * Memory: 9.7 MB - Beats 100.00% of submissions
+ * Data Structures: Binary Trees
+ * Algorithms: Recursion
+ * Other: Pointers
  */
 
 /**
@@ -14,6 +17,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution {
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {

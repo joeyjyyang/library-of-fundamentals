@@ -3,6 +3,9 @@
  * Email: joeyyang.ai@gmail.com	
  * Runtime: 4 ms - Beats 98.17% of submissions
  * Memory: 19.4 MB - Beats 70.33% of submissions
+ * Data Structures: Binary Trees
+ * Algorithms: DFS (Recursion)
+ * Other: 
  */
 
 /**
