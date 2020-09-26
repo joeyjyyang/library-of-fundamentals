@@ -4,8 +4,8 @@
  * Runtime: 4 ms - Beats 87.67% of submissions
  * Memory: 8.1 MB - Beats 30.09% of submissions
  * Data Structures:
- * Algorithms: Recursion 
- * Other: Recursion Tree, Back Tracking, Permutations
+ * Algorithms: Recursion, Backtracking
+ * Other: Permutations
  */
 
 class Solution {
@@ -16,12 +16,12 @@ public:
         // Current permutation set.
         vector<int> num_set;
         // Beginning of recursive (tree) calls.
-        permuteRecursive(permutations, num_set, nums);
+        permuteBacktrack(permutations, num_set, nums);
         
         return permutations;
     }
     
-    void permuteRecursive(vector<vector<int>>& permutations, vector<int>& num_set, vector<int>& nums)
+    void permuteBacktrack(vector<vector<int>>& permutations, vector<int>& num_set, vector<int>& nums)
     {
         // Push permutation set to answers array 
         // if nums is empty, meaning there are no possible
@@ -41,7 +41,7 @@ public:
                 num_set.push_back(nums[i]);
                 // Recursive call, passing in new numbers,
                 // with 1 number removed (added to number set).
-                permuteRecursive(permutations, num_set, new_nums);
+                permuteBacktrack(permutations, num_set, new_nums);
                 // Remove number from current permutation set
                 // in the last position.
                 // Ready to add next number and perform recursion.
