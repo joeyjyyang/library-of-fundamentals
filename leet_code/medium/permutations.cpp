@@ -4,7 +4,7 @@
  * Runtime: 4 ms - Beats 87.67% of submissions
  * Memory: 8.1 MB - Beats 30.09% of submissions
  * Data Structures:
- * Algorithms: Recursion, Backtracking
+ * Algorithms: Recursion, Backtracking, DFS
  * Other: Permutations
  */
 
