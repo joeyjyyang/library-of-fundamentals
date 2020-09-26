@@ -3,6 +3,9 @@
  * Email: joeyyang.ai@gmail.com	
  * Runtime: 176 ms - Beats 61.41% of submissions
  * Memory: 16.8 MB - Beats 33.33% of submissions
+ * Data Structures:
+ * Algorithms: Sliding Window
+ * Other:
  */
 
 class Solution {
