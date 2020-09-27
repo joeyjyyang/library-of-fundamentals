@@ -1,8 +1,8 @@
 /*
  * Author: Joey Yang
  * Email: joeyyang.ai@gmail.com	
- * Runtime: 4 ms - Beats 99.71% of submissions
- * Memory: 10 MB - Beats 56.40% of submissions
+ * Runtime: 12 ms - Beats 79.65% of submissions
+ * Memory: 13.5 MB - Beats 11.27% of submissions
  * Data Structures:
  * Algorithms: Kadane's Algorithm, Dynamic Programming (Tabulation)
  * Other: Subarrays
