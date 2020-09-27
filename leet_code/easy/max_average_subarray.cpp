@@ -5,7 +5,7 @@
  * Memory: 16.8 MB - Beats 33.33% of submissions
  * Data Structures:
  * Algorithms: Sliding Window
- * Other:
+ * Other: Subarrays
  */
 
 class Solution {
